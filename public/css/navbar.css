@@ -1,0 +1,19 @@
+body {
+    background: url(../images/homepage.jpg) no-repeat center center fixed;
+    background-size: cover;
+  }
+
+
+
+  /* Custom CSS for centering navigation bar items */
+  .navbar-nav {
+    margin-left: auto; /* Center the navbar items horizontally */
+    display: flex;
+    flex-direction: row;
+  }
+
+  .navbar-nav .nav-link {
+    color: #343a40; /* Set text color for links */
+    font-weight: bold; /* Make text bold */
+    padding: 0 20px 0 10px; /* Add padding to the navbar items */
+  }
