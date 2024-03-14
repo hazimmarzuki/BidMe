@@ -20,12 +20,19 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if ( !auth()-> attempt ($request->only('email', 'password')))
-        {
-            return back()->with('error', 'Invalid email or password');
-        }
+        $email= User::find($request->input('email'));
+        $request ->session()->put('id', User::select['id']->where('email', $email));
 
-        return redirect()->route('dashboard');
+        dd($request->session()->get('id'));
+        // if ( !auth()-> attempt ($request->only('email', 'password')))
+        // {
+        //     return back()->with('error', 'Invalid email or password');
+        // }
+        // esle{
+        //     return redirect()->route('dashboard');
+        // }
+
+// hi git
 
 
 }
