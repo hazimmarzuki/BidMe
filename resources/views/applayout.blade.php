@@ -28,6 +28,23 @@
             />
             <strong> Bid Me</strong>
           </a>
+          <div class="collapseNavBar navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('register') }}">BID</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link @if (Request::is('profile')) active @endif" href="{{ route('profile') }}">PROFILE</a>
+                  </li>
+                  <li class="nav-item">
+
+                    <form  action="{{ route('logout') }}"  method="post" >
+                        @csrf
+
+                        <button type="submit" class="btn nav-link">LOGOUT</button>
+                     </form>                  </li>
+            </ul>
+          </div>
         </div>
       </nav>
     </header>

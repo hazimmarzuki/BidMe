@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
@@ -17,9 +18,9 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('Account.login');
-// }) -> name ('login');
+Route::get('/', function () {
+    return view('welcome');
+}) ;
 
 
 
@@ -42,5 +43,16 @@ Route::get('/dashboard', [DashboardController::class, 'index' ])
 -> name ('dashboard')
 ->middleware ('auth');
 
+Route::get('/profile', [ProfileController::class, 'index' ])
+-> name ('profile')
+->middleware ('auth');
+
+Route::get('/profile/edit', [ProfileController::class, 'editprofile' ])
+-> name ('edit-profile')
+->middleware ('auth');
+
+Route::post('/profile/{id}', [ProfileController::class, 'updateprofile' ])
+-> name ('update-profile')
+->middleware ('auth');
 
 

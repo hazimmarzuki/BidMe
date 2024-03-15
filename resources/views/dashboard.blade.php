@@ -1,10 +1,21 @@
-@extends('auth.layout')
+@extends('applayout')
 
 @section('content')
 
-<form action="{{ route('logout') }}"  method="post">
-@csrf
+<link rel="stylesheet" href="{{asset('css/dashboard.css')}}" />
 
-<button type="submit" class="btn btn-primary">LOGOUT</button>
-</form>
+<div class="container-sm">
+    <!-- Centering the container and making it smaller -->
+    <div>
+      <!-- Centering the row horizontally -->
+      <h2>Hello {{Auth::user()->name}}</h2>
+
+
+    </div>
+  </div>
+
+<P>Hello {{Auth::user()->name}}</P>
+
+
+
 @endsection
