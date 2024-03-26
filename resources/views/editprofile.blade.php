@@ -15,7 +15,7 @@
             <a class="nav-link @if (Request::is('profile')) active @endif" href="{{ route('profile') }}">Sales History</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('edit-profile')) active @endif" href="{{ route('edit-profile') }}">Edit Profile</a>
+            <a class="nav-link @if (Request::is('profile/edit')) active @endif" href="{{ route('edit-profile') }}">Edit Profile</a>
           </li>
         </ul>
       </div>

@@ -25,20 +25,16 @@
 
 
             <div class="row mb-3">
-              <label for="inputEmail3" class="col-sm-2 col-form-label"
-                >Email</label
-              >
-              <div class="col-sm-10">
-                <input type="email" class="form-control @error('email') is-invalid @enderror"
-                name="email"  value="{{ old('email') }}" />
+                <label for="inputEmail3" class="col-sm-2 col-form-label"
+                  >Email</label
+                >
+                <div class="col-sm-10">
+                  <input type="email" class="form-control "
+                  name="email"  value="" />
 
-
-                @error('email')
-                    <div class="invalid-feedback">{{$message}}</div>
-                @enderror
-
+                </div>
               </div>
-            </div>
+
 
             <div class="row mb-3">
               <label for="inputPassword" class="col-sm-2 col-form-label"
@@ -48,20 +44,10 @@
 
                 <input
                   type="password"
-                  class="form-control @error('password') is-invalid @enderror"
+                  class="form-control "
                    name="password"
-                  value="{{ old ('password') }}"
+                  value=""
                 />
-
-
-
-
-                @error('password')
-                <div class="invalid-feedback">{{$message}}</div>
-                @enderror
-
-
-
 
               </div>
             </div>

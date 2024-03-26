@@ -1,7 +1,7 @@
   /* form  */
 
   .navbar-profile {
-    margin-right: 0; /* left the second navbar items horizontally */
+    margin-left: 0; /* left the second navbar items horizontally */
     display: flex;
     flex-direction: row;
     background-color:  rgba(
@@ -34,4 +34,15 @@
 
 
 
+  .navbar-profile .nav-link {
+    color: #343a40; /* Set text color for links */
+    font-weight: bold; /* Make text bold */
+    padding: 0 20px 0 10px; /* Add padding to the navbar items */
+  }
+
+
+
+  .navbar-profile .active {
+    font-weight: bold;
+  }
 

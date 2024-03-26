@@ -14,7 +14,7 @@ class ProfileController extends Controller
     }
 
     public function editprofile(){
-        $user = Auth::user();
+       // $user = Auth::user();
         // $user->name = $request->name;
         // $user->email = $request->email;
         // $user->save();
