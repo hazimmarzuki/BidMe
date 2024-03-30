@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->decimal('starting_price', 10, 2);
-            $table->dateTime('duration');
+            $table->integer('duration');
             $table->string('image')->nullable();
             $table->timestamps();
         });

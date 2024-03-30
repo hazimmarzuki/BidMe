@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
@@ -43,6 +44,7 @@ Route::get('/dashboard', [DashboardController::class, 'index' ])
 -> name ('dashboard')
 ->middleware ('auth');
 
+//profile
 Route::get('/profile', [ProfileController::class, 'index' ])
 -> name ('profile')
 ->middleware ('auth');
@@ -55,4 +57,15 @@ Route::post('/profile/{id}', [ProfileController::class, 'updateprofile' ])
 -> name ('update-profile')
 ->middleware ('auth');
 
+//item
+Route::get('/item', [ItemController::class, 'index' ])
+-> name ('show-items')
+->middleware ('auth');
 
+Route::get('/item/create', [ItemController::class, 'create' ])
+-> name ('create-item')
+->middleware ('auth');
+
+Route::post('/item/store', [ItemController::class, 'store'])
+-> name ('store-item')
+->middleware ('auth');
