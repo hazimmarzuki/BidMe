@@ -21,38 +21,28 @@ class ItemController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'starting_price' => 'required|numeric|min:0',
-            'duration' => 'required|numeric|min:0',
+            'countdown_date' => 'required|date_format:Y-m-d\TH:i',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        // Convert duration from hours to seconds
-        $validatedData['duration'] *= 3600;
-
         // Handle file upload
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $validatedData['image'] = 'images/' . $imageName;
-        }
+        // if ($request->hasFile('image')) {
+        //     $image = $request->file('image');
+        //     $imageName = time() . '.' . $image->getClientOriginalExtension();
+        //     $image->move(public_path('images'), $imageName);
+        //     $validatedData['image'] = 'images/' . $imageName;
+        // }
 
-        Item::create($validatedData);
+        dd($validatedData);
+        // Item::create($validatedData);
 
-        return redirect()->route('show-items')->with('success', 'item created successfully!');
+        // return redirect()->route('show-items')->with('success', 'item created successfully!');
     }
     public function index()
 {
-    $items = Item::all();
-    $itemsWithTimeRemaining = [];
 
-    foreach ($items as $item) {
-        $itemsWithTimeRemaining[] = [
-            'item' => $item,
-            'time_remaining' => $item->timeRemaining(),
-        ];
-    }
-
-    return view('showitems', compact('itemsWithTimeRemaining'));
+    $items = Item::orderBy('countdown_date', 'asc')->get();
+    return view('showitems', compact('items'));
 }
 
 }

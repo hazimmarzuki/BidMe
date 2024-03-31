@@ -1,21 +1,15 @@
-@if(session('success'))
-    <div>{{ session('success') }}</div>
-@endif
 
-<!-- resources/views/items/index.blade.php -->
+
 
 @if(session('success'))
     <div>{{ session('success') }}</div>
 @endif
 
 <h2>All Items</h2>
-@if(count($itemsWithTimeRemaining) > 0)
+@if(count($items) > 0)
     <ul>
-        @foreach($itemsWithTimeRemaining as $itemData)
-            @php
-                $item = $itemData['item'];
-                $timeRemaining = $itemData['time_remaining'];
-            @endphp
+        @foreach($items as $item)
+
             <li>
                 <strong>Title:</strong> {{ $item->title }}<br>
                 <strong>Description:</strong> {{ $item->description }}<br>
@@ -24,8 +18,11 @@
                 @if($item->image)
                     <img src="{{ asset($item->image) }}" alt="item Image"><br>
                 @endif
-                <strong>End Time:</strong> {{ $item->end_time }}<br>
-                <strong>Time Remaining:</strong> <span id="time-remaining-{{ $item->id }}">{{ gmdate("H:i:s", $timeRemaining) }}</span><br>
+                <div class="col-md-4">
+                    <div class="countdown-container">
+                        <span id="countdown-{{ $item->id }}"></span>
+                    </div>
+                </div>
             </li>
         @endforeach
     </ul>
@@ -33,25 +30,30 @@
     <p>No items found.</p>
 @endif
 
-<script>
-    setInterval(function() {
-        @foreach($itemsWithTimeRemaining as $itemData)
-            @php
-                $item = $itemData['item'];
-                $timeRemaining = $itemData['time_remaining'];
-            @endphp
-            var timeRemaining = {{ $timeRemaining }};
-            var countdownElement = document.getElementById('time-remaining-{{ $item->id }}');
-            if (timeRemaining > 0) {
-                var hours = Math.floor(timeRemaining / 3600);
-                var minutes = Math.floor((timeRemaining % 3600) / 60);
-                var seconds = timeRemaining % 60;
-                countdownElement.textContent = hours + ':' + minutes + ':' + seconds;
-                timeRemaining--;
-            } else {
-                countdownElement.textContent = 'item Ended';
-            }
-        @endforeach
-    }, 1000);
-</script>
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            @foreach($items as $item)
+                var countdownDate = new Date("{{ $item->countdown_date }}").getTime();
+
+                var x = setInterval(function() {
+                    var now = new Date().getTime();
+                    var distance = countdownDate - now;
+
+                    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                    document.getElementById("countdown-{{ $item->id }}").innerHTML = days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+
+                    if (distance < 0) {
+                        clearInterval(x);
+                        document.getElementById("countdown-{{ $item->id }}").innerHTML = "EXPIRED";
+                    }
+                }, 1000);
+            @endforeach
+        });
+    </script>
+@endpush
 

@@ -10,17 +10,7 @@ class Item extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'starting_price', 'duration', 'image', 'end_time'];
+    protected $fillable = ['title', 'description', 'starting_price', 'countdown_date', 'image'];
 
-    public function getEndTimeAttribute()
-    {
-        return Carbon::parse($this->start_time)->addSeconds($this->duration);
-    }
 
-    public function timeRemaining()
-    {
-        $now = Carbon::now();
-        $end = $this->end_time;
-        return $now->diffInSeconds($end);
-    }
 }
