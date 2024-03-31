@@ -17,6 +17,8 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
+        // dd($request->all());
+
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
@@ -26,17 +28,16 @@ class ItemController extends Controller
         ]);
 
         // Handle file upload
-        // if ($request->hasFile('image')) {
-        //     $image = $request->file('image');
-        //     $imageName = time() . '.' . $image->getClientOriginalExtension();
-        //     $image->move(public_path('images'), $imageName);
-        //     $validatedData['image'] = 'images/' . $imageName;
-        // }
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $validatedData['image'] = 'images/' . $imageName;
+        }
 
-        dd($validatedData);
-        // Item::create($validatedData);
+        Item::create($validatedData);
 
-        // return redirect()->route('show-items')->with('success', 'item created successfully!');
+        return redirect()->route('show-items')->with('success', 'item created successfully!');
     }
     public function index()
 {

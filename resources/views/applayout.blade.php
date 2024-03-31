@@ -11,6 +11,7 @@
     />
     <!-- custom css file  -->
     <link rel="stylesheet" href="{{asset('css/navbar.css')}}" />
+
   </head>
 
   <body>
@@ -31,7 +32,7 @@
           <div class="collapseNavBar navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('register') }}">BID</a>
+                    <a class="nav-link @if (Request::is('item')) active @endif" href="{{ route('show-items') }}">BID</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link @if (Request::is('profile')) active @endif" href="{{ route('profile') }}">PROFILE</a>
