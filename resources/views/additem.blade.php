@@ -17,17 +17,27 @@
             @endif
             <form method="POST" action="{{ route('store-item') }}" enctype="multipart/form-data">
                 @csrf
-                <label for="title">Auction Title:</label>
-                <input type="text" id="title" name="title" required>
-                <label for="description">Description:</label>
-                <textarea id="description" name="description" required></textarea>
-                <label for="starting_price">Starting Price:</label>
-                <input type="text" id="starting_price" name="starting_price" required>
-                <label for="countdown_date">Countdown Date:</label>
-                <input type="datetime-local" id="countdown_date" name="countdown_date" value="{{ old('countdown_date') }}" required>
-                <label for="image">Upload Image:</label>
-                <input type="file" id="image" name="image" accept="image/*" required>
-                <button type="submit">Create Auction</button>
+                <div class="mb-3">
+                    <label for="title" class="form-label">Auction Title:</label>
+                    <input type="text" id="title" name="title" required class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description:</label>
+                    <textarea id="description" name="description" required class="form-control"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="starting_price" class="form-label">Starting Price RM:</label>
+                    <input type="text" id="starting_price" name="starting_price" required class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="countdown_date" class="form-label">Last time for bid:</label>
+                    <input type="datetime-local" id="countdown_date" name="countdown_date" value="{{ old('countdown_date') }}" required class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="image" class="form-label">Upload Image:</label>
+                    <input type="file" id="image" name="image" accept="image/*" required class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Create Auction</button>
             </form>
         </div>
     </div>

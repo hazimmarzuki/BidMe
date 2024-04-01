@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class ItemController extends Controller
@@ -23,7 +25,7 @@ class ItemController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'starting_price' => 'required|numeric|min:0',
-            'countdown_date' => 'required|date_format:Y-m-d\TH:i',
+            'countdown_date' => 'required|date_format:Y-m-d TH:i',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -34,6 +36,7 @@ class ItemController extends Controller
             $image->move(public_path('images'), $imageName);
             $validatedData['image'] = 'images/' . $imageName;
         }
+        $validatedData['user_id'] = Auth::id();
 
         Item::create($validatedData);
 
@@ -41,8 +44,11 @@ class ItemController extends Controller
     }
     public function index()
 {
+    $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
 
-    $items = Item::orderBy('countdown_date', 'asc')->get();
+    $items = Item::where('countdown_date', '>', $currentDateTime )
+    ->orderBy('countdown_date', 'asc')
+    ->paginate(6);
     return view('showitems', compact('items'));
 }
 

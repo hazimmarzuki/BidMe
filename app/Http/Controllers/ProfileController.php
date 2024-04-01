@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -9,8 +10,10 @@ class ProfileController extends Controller
 {
     //
     public function index(){
-        $user = Auth::user();
-        return view('profile');
+        $user_id = Auth::id();
+        $items = Item::where('user_id', $user_id)->orderBy('countdown_date', 'asc')->paginate(6);
+        return view('profile', compact('items'));
+
     }
 
     public function editprofile(){

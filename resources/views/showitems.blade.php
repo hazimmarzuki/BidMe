@@ -39,7 +39,10 @@
                 </div>
             @endif
         </div>
+        {{ $items->links()}}
+
     </div>
+
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
@@ -50,10 +53,6 @@
                 $('#countdown-{{ $item->id }}').countdown('{{ $item->countdown_date->format('Y/m/d H:i:s') }}', function(event) {
                     var $this = $(this);
                     $this.html(event.strftime('%D days %H:%M:%S'));
-
-                    if (event.elapsed) {
-                        $this.html('EXPIRED');
-                    }
                 });
             @endforeach
         });

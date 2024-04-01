@@ -14,9 +14,9 @@ class Item extends Model
         'title',
         'description',
         'starting_price',
-        'duration',
         'countdown_date',
         'image',
+        'user_id'
     ];
 
     public function getCountdownDateAttribute($value)

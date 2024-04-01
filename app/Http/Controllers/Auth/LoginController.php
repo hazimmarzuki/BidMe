@@ -32,7 +32,7 @@ class LoginController extends Controller
             return back()->with('error', 'Invalid email or password');
         }
 
-            return redirect()->route('dashboard');
+            return redirect()->route('show-items');
 
 }
 }

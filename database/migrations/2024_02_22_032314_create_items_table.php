@@ -18,6 +18,7 @@ return new class extends Migration
             $table->decimal('starting_price', 10, 2);
             $table->datetime('countdown_date');
             $table->string('image')->nullable();
+            $table->foreignId('user_id');
             $table->timestamps();
         });
     }
