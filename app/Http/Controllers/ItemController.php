@@ -25,7 +25,7 @@ class ItemController extends Controller
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'starting_price' => 'required|numeric|min:0',
-            'countdown_date' => 'required|date_format:Y-m-d TH:i',
+            'countdown_date' => 'required|date_format:Y-m-d\TH:i',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -33,8 +33,8 @@ class ItemController extends Controller
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $validatedData['image'] = 'images/' . $imageName;
+            $image->move(public_path('images/' . 'items_image'), $imageName);
+            $validatedData['image'] = 'images/' . 'items_image/'. $imageName;
         }
         $validatedData['user_id'] = Auth::id();
 
