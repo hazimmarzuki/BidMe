@@ -3,38 +3,40 @@
 @section('content')
 
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}" />
-    <div class="container-sm">
+    <div class="container-lg">
         <!-- Centering the container and making it smaller -->
-        <div>
+        <div class="row">
             <!-- Centering the row horizontally -->
             @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
+                <div class="col-12">
+                    <div class="alert alert-success">{{ session('success') }}</div>
+                </div>
             @endif
 
-            <h2>All Items</h2>
+            <h2 class="col-12">All Items</h2>
 
             @if ($items->count() > 0)
-                <ul>
-                    @foreach ($items as $item)
-                        <li>
-                            <strong>Title:</strong> {{ $item->title }}<br>
-                            <strong>Description:</strong> {{ $item->description }}<br>
-                            <strong>Starting Price:</strong> RM{{ $item->starting_price }}<br>
-
+                @foreach ($items as $item)
+                    <div class="col-md-4 mb-4">
+                        <div class="card">
                             @if ($item->image)
-                                <img src="{{ asset($item->image) }}" alt="Item Image"><br>
+                                <img src="{{ asset($item->image) }}" class="card-img-top" alt="Item Image" style="width: 100%; height: 200px; object-fit: cover;">
                             @endif
-
-                            <div class="col-md-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $item->title }}</h5>
+                                <p class="card-text">{{ $item->description }}</p>
+                                <p class="card-text">Starting Price: RM{{ $item->starting_price }}</p>
                                 <div class="countdown-container">
                                     <span id="countdown-{{ $item->id }}"></span>
                                 </div>
                             </div>
-                        </li>
-                    @endforeach
-                </ul>
+                        </div>
+                    </div>
+                @endforeach
             @else
-                <p>No items found.</p>
+                <div class="col-12">
+                    <p>No items found.</p>
+                </div>
             @endif
         </div>
     </div>
