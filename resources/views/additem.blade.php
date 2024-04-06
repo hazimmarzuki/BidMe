@@ -19,15 +19,15 @@
                 @csrf
                 <div class="mb-3">
                     <label for="title" class="form-label">Auction Title:</label>
-                    <input type="text" id="title" name="title" required class="form-control">
+                    <input type="text" id="title" name="title" value="{{ old('title') }}"required class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description:</label>
-                    <textarea id="description" name="description" required class="form-control"></textarea>
+                    <textarea id="description" name="description" required class="form-control">{{ old('description') }}</textarea>
                 </div>
                 <div class="mb-3">
-                    <label for="starting_price" class="form-label">Starting Price RM:</label>
-                    <input type="text" id="starting_price" name="starting_price" required class="form-control">
+                    <label for="price" class="form-label">Starting Price RM:</label>
+                    <input type="text" id="price" name="price" value="{{ old('price') }}" required class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="countdown_date" class="form-label">Last time for bid:</label>

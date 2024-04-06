@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BidController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -41,33 +42,41 @@ Route::post('/logout', [LogoutController::class, 'store' ]) -> name ('logout');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index' ])
--> name ('dashboard')
-->middleware ('auth');
+-> name ('dashboard')->middleware ('auth');
 
 //profile
-Route::get('/profile', [ProfileController::class, 'index' ])
--> name ('profile')
-->middleware ('auth');
+Route::get('/profile', [ProfileController::class, 'index' ]) // show all items of the user
+-> name ('profile')->middleware ('auth');
 
 Route::get('/profile/edit', [ProfileController::class, 'editprofile' ])
--> name ('edit-profile')
-->middleware ('auth');
+-> name ('edit-profile')->middleware ('auth');
 
 Route::post('/profile/{id}', [ProfileController::class, 'updateprofile' ])
--> name ('update-profile')
-->middleware ('auth');
+-> name ('update-profile')->middleware ('auth');
 
 //item
 Route::get('/item', [ItemController::class, 'index' ])
--> name ('show-items')
-->middleware ('auth');
+-> name ('show-items')->middleware ('auth');
 
 Route::get('/item/create', [ItemController::class, 'create' ])
--> name ('create-item')
-->middleware ('auth');
+-> name ('create-item')->middleware ('auth');
 
 Route::post('/item/store', [ItemController::class, 'store'])
--> name ('store-item')
-->middleware ('auth');
+-> name ('store-item')->middleware ('auth');
+
+Route::get ('/item/{id}/edit', [ItemController::class, 'edit'])
+-> name ('edit-item') ->middleware ('auth');
+
+Route::post ('/item/{id}', [ItemController::class, 'update'])
+-> name ('update-item')->middleware ('auth');
+
+Route::delete ('/item/{id}', [ItemController::class, 'destroy'])
+-> name ('delete-item')->middleware ('auth');
+
+Route::get ('/bid/{id}/view', [ItemController::class, 'bidview'])
+-> name ('bid-view') ->middleware ('auth');
+
+Route::post ('/bid/{id}', [BidController::class, 'bid'])
+-> name ('bid-item')->middleware ('auth');
 
 

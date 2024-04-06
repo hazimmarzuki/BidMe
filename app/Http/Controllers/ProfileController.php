@@ -10,8 +10,8 @@ class ProfileController extends Controller
 {
     //
     public function index(){
-        $user_id = Auth::id();
-        $items = Item::where('user_id', $user_id)->orderBy('countdown_date', 'asc')->paginate(6);
+        $seller_id = Auth::id();
+        $items = Item::where('seller_id', $seller_id)->orderBy('countdown_date', 'asc')->paginate(6);
         return view('profile', compact('items'));
 
     }

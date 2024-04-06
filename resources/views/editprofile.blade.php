@@ -12,6 +12,9 @@
             <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('register') }}">Add New Item</a>
           </li>
           <li class="nav-item">
+            <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('profile') }}">Purchase History</a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link @if (Request::is('profile')) active @endif" href="{{ route('profile') }}">Sales History</a>
           </li>
           <li class="nav-item">

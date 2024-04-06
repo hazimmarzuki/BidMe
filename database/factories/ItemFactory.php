@@ -22,9 +22,10 @@ class ItemFactory extends Factory
             //
             'title' => $this->faker->sentence(),
             'description' => $this->faker->sentence(),
-            'starting_price' => $this->faker->randomFloat(2,10,100),
+            'price' => $this->faker->randomFloat(2,10,100),
             'countdown_date' => $this->faker->dateTimeBetween('now', '+1 week')-> format('Y-m-d H:i:s'),
             'image' => basename($imagePath),
+            'seller_id' => $this->faker->randomDigit(),
             'created_at' => now(),
             'updated_at' => now(),
         ];

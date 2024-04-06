@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Bid;
 use App\Models\Item;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
@@ -47,5 +48,10 @@ class User extends Authenticatable
     public function items() {
 
         return $this->hasMany(Item::class);
+    }
+
+    public function bids() {
+
+        return $this->hasMany(Bid::class);
     }
 }

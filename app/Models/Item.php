@@ -13,10 +13,11 @@ class Item extends Model
     protected $fillable = [
         'title',
         'description',
-        'starting_price',
+        'price',
         'countdown_date',
         'image',
-        'user_id'
+        'seller_id',
+        'buyer_id'
     ];
 
     public function getCountdownDateAttribute($value)

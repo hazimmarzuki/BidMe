@@ -13,29 +13,36 @@
                 </div>
             @endif
 
-            <h2 class="col-12">All Items</h2>
+
 
             @if ($items->count() > 0)
+            <h2 class="col-12">All Items</h2>
                 @foreach ($items as $item)
                     <div class="col-md-4 mb-4">
                         <div class="card">
                             @if ($item->image)
-                                <img src="{{ asset($item->image) }}" class="card-img-top" alt="Item Image" style="width: 100%; height: 200px; object-fit: cover;">
+                                <img src="{{ asset($item->image) }}" class="card-img-top" alt="Item Image"
+                                style="width: 100%; height: 200px; object-fit: contain;">
                             @endif
                             <div class="card-body">
-                                <h5 class="card-title">{{ $item->title }}</h5>
+                                <h5 class="card-title"><strong>{{ $item->title }}</strong></h5>
                                 <p class="card-text">{{ $item->description }}</p>
-                                <p class="card-text">Starting Price: RM{{ $item->starting_price }}</p>
-                                <div class="countdown-container">
+                                <p class="card-text"><strong>Current Price:</strong> RM{{ $item->price }}</p>
+                                <strong>Time remaining:</strong>
+                                <div class="countdown-container d-inline">
                                     <span id="countdown-{{ $item->id }}"></span>
-                                </div>
+                                </div> <br>
+                                <div class="text-center">
+                                <a type="submit" class="btn btn-primary btn-sm" href= {{route ('bid-view', $item->id)}}
+                                    style="margin-right: 10px;"
+                                    >BID</a></div>
                             </div>
                         </div>
                     </div>
                 @endforeach
             @else
-                <div class="col-12">
-                    <p>No items found.</p>
+                <div class="container-sm">
+                    <h2>There are no items to bid right now :(</h2>
                 </div>
             @endif
         </div>
