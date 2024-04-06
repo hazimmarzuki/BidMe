@@ -87,6 +87,7 @@ public function destroy ($id) //delete an item
 {
 
     $item = Item::findOrFail($id);
+    unlink($item->image);
     $item->delete();
 
     return redirect()->route('profile')->with('success', 'item deleted successfully!');
