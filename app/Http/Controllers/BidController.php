@@ -68,7 +68,7 @@ public function bid(Request $request, $id)
         $item->price = $request->bid;
         $item->save();
 
-        return redirect()->route('bid-view', $id)->with('success', 'bid placed successfully!');
+        return redirect()->route('show-items')->with('success', 'bid placed successfully!');
     } else {
         return back()->with('error', 'you need to bid more than the current price');
     }

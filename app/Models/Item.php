@@ -17,9 +17,12 @@ class Item extends Model
         'price',
         'countdown_date',
         'image',
-        'seller_id',
-        'buyer_id'
+        'seller_id'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class , 'seller_id');
+    }
 
     public function getCountdownDateAttribute($value)
     {

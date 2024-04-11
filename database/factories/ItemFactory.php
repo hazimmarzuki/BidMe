@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Item;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -14,6 +15,7 @@ class ItemFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    protected $model = Item::class;
     public function definition(): array
     {
         $imagePath = $this->faker->image(public_path('images'), 640, 480, null, false);

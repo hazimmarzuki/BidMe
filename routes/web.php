@@ -20,9 +20,9 @@ use App\Http\Controllers\Auth\RegisterController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-}) ;
+// Route::get('/', function () {
+//     return view('showitems');
+// }) ;
 
 
 
@@ -55,8 +55,8 @@ Route::post('/profile/{id}', [ProfileController::class, 'updateprofile' ])
 -> name ('update-profile')->middleware ('auth');
 
 //item
-Route::get('/item', [ItemController::class, 'index' ])
--> name ('show-items')->middleware ('auth');
+Route::get('/', [ItemController::class, 'index' ])
+-> name ('show-items');
 
 Route::get('/item/create', [ItemController::class, 'create' ])
 -> name ('create-item')->middleware ('auth');
