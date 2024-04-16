@@ -65,7 +65,9 @@ public function edit($id) //go to edit item form
 
 public function update(Request $request, $id) //update the edited item
 {
+
     $item = Item::findOrFail($id);
+
 
     $item->title = $request->title;
     $item->description = $request->description;

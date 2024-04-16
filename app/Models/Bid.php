@@ -16,4 +16,8 @@ class Bid extends Model
         'buyer_id',
         'bid_time'
     ];
+
+    public function item() {
+        return $this->belongsTo(Item::class );
+    }
 }

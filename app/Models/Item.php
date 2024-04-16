@@ -24,6 +24,11 @@ class Item extends Model
         return $this->belongsTo(User::class , 'seller_id');
     }
 
+    public function bids() {
+
+        return $this->hasMany(Bid::class);
+    }
+
     public function getCountdownDateAttribute($value)
     {
         return Carbon::parse($value);

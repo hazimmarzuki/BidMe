@@ -20,6 +20,9 @@
           <li class="nav-item">
             <a class="nav-link @if (Request::is('profile/edit')) active @endif" href="{{ route('edit-profile') }}">Edit Profile</a>
           </li>
+          {{-- <li class="nav-item">
+            <a class="nav-link @if (Request::is('/bid/status')) active @endif" href="{{ route('show-bids') }}">Bid Status</a>
+          </li> --}}
         </ul>
       </div>
     </div>
@@ -55,9 +58,14 @@
                                 <span id="countdown-{{ $item->id }}"></span>
                             </div>
                             <br>
+
+                            @if ($item->countdown_date < now())
                             <a type="submit" class="btn btn-primary btn-sm" href= {{route ('edit-item', $item->id)}}
-                            style="margin-right: 10px;"
-                            >Edit</a>
+                                style="margin-right: 10px;"
+                                >Edit</a>
+                            @endif
+
+
                             <form action="{{ route('delete-item', $item->id) }}" method="POST" class="d-inline"
                                 onsubmit="return confirm('Are you sure want to delete item titled {{$item->title}}?')">
                             @method('delete')

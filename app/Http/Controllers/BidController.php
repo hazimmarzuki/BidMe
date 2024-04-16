@@ -10,41 +10,36 @@ use Illuminate\Support\Facades\Auth;
 
 class BidController extends Controller
 {
-    //
-//     public function bid(Request $request, $id)
-// {
-//     $item = Item::findOrFail($id);
-//     if($request->bid > $item->price) {
-//     $validatedData = $request->validate([
-//         'bid' => 'required|numeric|min:0',
-//     ]);
-//     $item->price = $request->bid;
-//     $item->save();
 
-//     $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
-
-
-//     $data['item_id'] = $item->id;
-//     $data['bid_amount'] = $item->price;
-//     $data['seller_id'] = $item->seller_id;
-//     $data['buyer_id'] = Auth::id();
-//     $data['bid_time'] = $currentDateTime;
-//     Bid::create($data);
-
-
-//     return redirect()->route('bid-view', $id)->with('success', 'bid placed successfully!');
-
-// }
-// else{
-//     return back()->with('error', 'you need to bid more than the current price');
-// }
-// }
-public function bid(Request $request, $id)
+public function bid(Request $request, $id) // update item price and create/ovewrite bid
 {
     $item = Item::findOrFail($id);
-    if ($request->bid > $item->price) {
+    $currentPrice = $item->price;
+
+
+    // Determine the bid increment based on the current price
+    $bidIncrement = 0;
+    if ($currentPrice >= 0 && $currentPrice < 25) {
+        $bidIncrement = 0.5;
+    } elseif ($currentPrice >= 25 && $currentPrice < 100) {
+        $bidIncrement = 1;
+    } elseif ($currentPrice >= 100 && $currentPrice < 250) {
+        $bidIncrement = 2.5;
+    } elseif ($currentPrice >= 250 && $currentPrice < 500) {
+        $bidIncrement = 5;
+    } elseif ($currentPrice >= 500 && $currentPrice < 1000) {
+        $bidIncrement = 10;
+    } elseif ($currentPrice >= 1000 && $currentPrice < 2500) {
+        $bidIncrement = 25;
+    } elseif ($currentPrice >= 2500 && $currentPrice < 5000) {
+        $bidIncrement = 50;
+    } elseif ($currentPrice >= 5000) {
+        $bidIncrement = 100;
+    }
+
+    if ($request->bid > $currentPrice + $bidIncrement) {
         $validatedData = $request->validate([
-            'bid' => 'required|numeric|min:0',
+            'bid' => 'required|numeric|min:' . ($currentPrice + $bidIncrement) ,
         ]);
 
         $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
@@ -70,7 +65,7 @@ public function bid(Request $request, $id)
 
         return redirect()->route('show-items')->with('success', 'bid placed successfully!');
     } else {
-        return back()->with('error', 'you need to bid more than the current price');
+        return back()->with('error', 'you need to bid with the valid price');
     }
 }
 

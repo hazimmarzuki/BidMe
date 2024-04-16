@@ -42,6 +42,36 @@
                     <input type="text" id="bid" name="bid" class="form d-inline">
                 </div>
 
+                <div class="mb-3">
+                  <label for="price" class="form-label" style="font-size: 12px">(<strong>Minimum bid: </strong> RM
+
+                    @if($item->price >= 0 && $item->price < 25)
+                         {{$item->price + 0.5 }}
+
+                    @elseif($item->price >= 25 && $item->price < 100)
+                        {{$item->price + 1 }}
+
+                    @elseif($item->price >= 100 && $item->price < 250)
+                        {{$item->price + 2.5}}
+
+                    @elseif($item->price >= 250 && $item->price < 500)
+                        {{$item->price + 5}}
+
+                    @elseif($item->price >= 500 && $item->price < 1000)
+                        {{$item->price + 10}}
+
+                    @elseif($item->price >= 1000 && $item->price < 2500)
+                        {{$item->price + 25}}
+
+                    @elseif($item->price >= 2500 && $item->price < 5000)
+                        {{$item->price + 50}}
+
+                    @elseif($item->price >= 5000)
+                        {{$item->price + 100}}
+                    @endif
+                  )</label>
+                </div>
+
                 <button type="submit" class="btn btn-primary">BID</button>
             </form>
         </div>

@@ -18,7 +18,7 @@
             <form method="POST" action="{{ route('store-item') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                    <label for="title" class="form-label">Auction Title:</label>
+                    <label for="title" class="form-label">Item's name:</label>
                     <input type="text" id="title" name="title" value="{{ old('title') }}"required class="form-control">
                 </div>
                 <div class="mb-3">
