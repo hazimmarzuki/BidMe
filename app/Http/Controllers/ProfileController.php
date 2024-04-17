@@ -11,7 +11,9 @@ class ProfileController extends Controller
     //
     public function index(){
         $seller_id = Auth::id();
-        $items = Item::where('seller_id', $seller_id)->orderBy('countdown_date', 'asc')->paginate(6);
+        $items = Item::where('seller_id', $seller_id)
+        ->withCount('bids')
+        ->orderBy('countdown_date', 'asc')->paginate(6);
         return view('profile', compact('items'));
 
     }

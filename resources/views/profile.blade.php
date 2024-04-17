@@ -59,7 +59,10 @@
                             </div>
                             <br>
 
-                            @if ($item->countdown_date < now())
+                            <a href="#"><em> {{ $item->bids_count}} bids</em></a> <br>
+
+
+                            @if ($item->countdown_date > now())
                             <a type="submit" class="btn btn-primary btn-sm" href= {{route ('edit-item', $item->id)}}
                                 style="margin-right: 10px;"
                                 >Edit</a>

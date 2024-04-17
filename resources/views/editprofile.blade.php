@@ -9,7 +9,7 @@
       <div class="collapseNavBar navbar-collapse" id="navbarNav">
         <ul class="navbar-nav navbar-profile">
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('register') }}">Add New Item</a>
+            <a class="nav-link @if (Request::is('item/create')) active @endif" href="{{ route('create-item') }}">Add New Item</a>
           </li>
           <li class="nav-item">
             <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('profile') }}">Purchase History</a>

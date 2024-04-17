@@ -52,6 +52,7 @@ class ItemController extends Controller
 
     $items = Item::where('countdown_date', '>', $currentDateTime )
     ->where('seller_id', '!=', $buyer_id)
+    ->withCount('bids')
     ->orderBy('countdown_date', 'asc')
     ->paginate(6);
     return view('showitems', compact('items'));
@@ -95,11 +96,7 @@ public function destroy ($id) //delete an item
     return redirect()->route('profile')->with('success', 'item deleted successfully!');
 }
 
-public function bidview($id)
-{
-    $item = Item::findOrFail($id);
-    return view('bid-view', compact('item'));
-}
+
 
 // public function bid(Request $request, $id)
 // {

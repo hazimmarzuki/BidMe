@@ -69,8 +69,10 @@
                     @elseif($item->price >= 5000)
                         {{$item->price + 100}}
                     @endif
-                  )</label>
+                  ) <a href="{{route('view-bidders' , $item->id)}}"><em> {{ $item->bids_count}} people bid(s) this item</em></a> <br>
+                </label>
                 </div>
+
 
                 <button type="submit" class="btn btn-primary">BID</button>
             </form>

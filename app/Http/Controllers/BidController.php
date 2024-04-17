@@ -5,12 +5,18 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Bid;
 use App\Models\Item;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class BidController extends Controller
 {
-
+public function bidview($id)
+    {
+        $item = Item::withCount('bids')
+        ->findOrFail($id);
+        return view('bid-view', compact('item'));
+    }
 public function bid(Request $request, $id) // update item price and create/ovewrite bid
 {
     $item = Item::findOrFail($id);
@@ -37,7 +43,7 @@ public function bid(Request $request, $id) // update item price and create/ovewr
         $bidIncrement = 100;
     }
 
-    if ($request->bid > $currentPrice + $bidIncrement) {
+    if ($request->bid >= $currentPrice + $bidIncrement) {
         $validatedData = $request->validate([
             'bid' => 'required|numeric|min:' . ($currentPrice + $bidIncrement) ,
         ]);
@@ -69,4 +75,21 @@ public function bid(Request $request, $id) // update item price and create/ovewr
     }
 }
 
+public function viewbidders( $id )
+{
+    $item = Item::findOrFail($id);
+    $bidders = User::with('bids')
+        ->whereHas('bids', function ($query) use ($id) {
+            $query->where('item_id', $id);
+        })
+        ->get();
+
+    return view('view-bidders', compact('bidders', 'item'));
+    // $bid = Bid::where('item_id', $id)
+    // ->with('bidders');
+
+    // $bidders = $bid->bidders;
+
+    // return view('viewbidders', compact('bidders'));
+}
 }

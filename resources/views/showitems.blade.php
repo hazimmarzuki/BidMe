@@ -32,6 +32,7 @@
                                 <div class="countdown-container d-inline">
                                     <span id="countdown-{{ $item->id }}"></span>
                                 </div> <br>
+                                <em> {{ $item->bids_count}} bids</em> <br>
                                 <div class="text-center">
                                 <a type="submit" class="btn btn-primary btn-sm" href= {{route ('bid-view', $item->id)}}
                                     style="margin-right: 10px;"
