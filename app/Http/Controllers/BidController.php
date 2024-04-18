@@ -75,16 +75,14 @@ public function bid(Request $request, $id) // update item price and create/ovewr
     }
 }
 
-public function viewbidders( $id )
+public function viewbuyers( $id )
 {
-    $item = Item::findOrFail($id);
-    $bidders = User::with('bids')
-        ->whereHas('bids', function ($query) use ($id) {
-            $query->where('item_id', $id);
-        })
-        ->get();
+    $buyers = Bid::where('item_id', $id)
+    ->with('buyer')
+    ->with ('item')
+    ->orderBy('bid_amount', 'desc')->get();
 
-    return view('view-bidders', compact('bidders', 'item'));
+    return view('view-buyers', compact('buyers'));
     // $bid = Bid::where('item_id', $id)
     // ->with('bidders');
 

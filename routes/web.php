@@ -79,7 +79,7 @@ Route::get ('/bid/{id}/view', [BidController::class, 'bidview'])
 Route::post ('/bid/{id}', [BidController::class, 'bid'])
 -> name ('bid-item')->middleware ('auth');
 
-Route::get ('/bid/{id}/bidders', [BidController::class, 'viewbidders'])
+Route::get ('/bid/buyers/{id}', [BidController::class, 'viewbuyers'])
 -> name ('view-bidders')->middleware ('auth');
 
 

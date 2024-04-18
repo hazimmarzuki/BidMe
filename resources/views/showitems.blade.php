@@ -16,7 +16,8 @@
 
 
             @if ($items->count() > 0)
-            <h2 class="col-12">All Items</h2>
+                <h2 class="col-12" style="background-color: #bcd9e8">All Items</h2>
+
                 @foreach ($items as $item)
                     <div class="col-md-4 mb-4">
                         <div class="card">

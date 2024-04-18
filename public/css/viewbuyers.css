@@ -1,0 +1,14 @@
+.container-lg {
+    margin-top: 100px;
+     min-height: 50vh; /*Center vertically on the page */
+    background-color: rgb(255, 255, 255, 0.925); /*Add a semi-transparent white background to make the form more readable */
+    padding: 20px;
+  }
+
+
+  /* Smaller container */
+  /* @media (min-width: 768px) {
+    .container-lg {
+      max-width: 600px;
+    }
+  } */

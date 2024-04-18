@@ -41,7 +41,7 @@
 
 
         @if ($items->count() > 0)
-        <h2 class="col-12">All Items</h2>
+        <h2 class="col-12" style="background-color: #bcd9e8">All Items</h2>
             @foreach ($items as $item)
                 <div class="col-md-4 mb-4">
                     <div class="card">
@@ -59,7 +59,7 @@
                             </div>
                             <br>
 
-                            <a href="#"><em> {{ $item->bids_count}} bids</em></a> <br>
+                            <a href="{{route('view-bidders' , $item->id)}}"><em> {{ $item->bids_count}} bids</em></a> <br>
 
 
                             @if ($item->countdown_date > now())
