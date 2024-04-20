@@ -73,6 +73,8 @@ Route::post ('/item/{id}', [ItemController::class, 'update'])
 Route::delete ('/item/{id}', [ItemController::class, 'destroy'])
 -> name ('delete-item')->middleware ('auth');
 
+//bid
+
 Route::get ('/bid/{id}/view', [BidController::class, 'bidview'])
 -> name ('bid-view') ->middleware ('auth');
 
@@ -82,4 +84,6 @@ Route::post ('/bid/{id}', [BidController::class, 'bid'])
 Route::get ('/bid/buyers/{id}', [BidController::class, 'viewbuyers'])
 -> name ('view-bidders')->middleware ('auth');
 
+Route::get ('/bid/showbids/', [BidController::class, 'showbids'])
+-> name ('show-bids')->middleware ('auth');
 

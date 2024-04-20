@@ -90,4 +90,18 @@ public function viewbuyers( $id )
 
     // return view('viewbidders', compact('bidders'));
 }
+
+public function showbids()
+{
+    $bids = Bid::where('buyer_id', Auth::id())
+    ->with('item')
+    ->orderBy('bid_time', 'desc')
+    ->get();
+
+    return view('show-bids', compact('bids'));
+
+
+}
+
+
 }

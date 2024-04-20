@@ -20,9 +20,9 @@
           <li class="nav-item">
             <a class="nav-link @if (Request::is('profile/edit')) active @endif" href="{{ route('edit-profile') }}">Edit Profile</a>
           </li>
-          {{-- <li class="nav-item">
+          <li class="nav-item">
             <a class="nav-link @if (Request::is('/bid/status')) active @endif" href="{{ route('show-bids') }}">Bid Status</a>
-          </li> --}}
+          </li>
         </ul>
       </div>
     </div>
@@ -37,8 +37,6 @@
                 <div class="alert alert-success">{{ session('success') }}</div>
             </div>
         @endif
-
-
 
         @if ($items->count() > 0)
         <h2 class="col-12" style="background-color: #bcd9e8">All Items</h2>
