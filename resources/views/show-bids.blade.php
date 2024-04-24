@@ -29,7 +29,7 @@
 
         @if ($bid->item && $bid->item->countdown_date < now())
             @if ($bid->bid_amount == $bid->item->price)
-          <td style="background-color: rgb(2, 202, 2)">Won</td>
+          <td style="background-color: rgb(2, 202, 2); ">Won  <button style="background-color: yellow; float: right;">PAY</button></td>
             @else
           <td style="background-color: rgb(216, 2, 2)">Lost</td>
              @endif
