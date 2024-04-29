@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
@@ -86,4 +87,13 @@ Route::get ('/bid/buyers/{id}', [BidController::class, 'viewbuyers'])
 
 Route::get ('/bid/showbids/', [BidController::class, 'showbids'])
 -> name ('show-bids')->middleware ('auth');
+
+//payment
+
+Route::get ('/payment/{id}', [PaymentController::class, 'showPaymentForm'])
+->name ('payment')->middleware ('auth');
+
+Route::post ('/paymentprocess/{id}', [PaymentController::class, 'paymentProcess'])
+->name ('payment-process')->middleware ('auth');
+
 
