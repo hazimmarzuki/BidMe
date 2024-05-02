@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bid;
+use App\Models\Payment;
 use Illuminate\Http\Request;
-use Billplz\Client;
+use Illuminate\Support\Facades\Http;
 
 
 class PaymentController extends Controller
 {
-    //
     public function showPaymentForm($id)
     {
         $bid = Bid::where('id', $id)
@@ -18,32 +18,83 @@ class PaymentController extends Controller
         return view('payment', compact('bid'));
     }
 
-    public function paymentProcess(Request $request, $id){
+    public function createpayment(Request $request, $id)
+    {
+        $bid = Bid::where('id', $id)
+        ->with('buyer')
+        ->with('item')->firstOrFail();
+        $option = array(
+            'userSecretKey'=> config('toyyibpay.key'),
+            'categoryCode'=> config('toyyibpay.category'),
+            'billName'=> $bid->item->title,
+            'billDescription'=>'Try Bid Me',
+            'billPriceSetting'=>1, //0 for fixed amount ,  for user key in data
+            'billPayorInfo'=>1,
+            'billAmount'=>$bid->bid_amount*100,
+            'billReturnUrl'=>route('payment-status'),
+            'billCallbackUrl'=>route('payment-callback'),
+            'billExternalReferenceNo' => $bid->id, //order-id
+            'billTo'=>$bid->buyer->name,
+            'billEmail'=>$bid->buyer->email,
+            'billPhone'=> '0126777439',
+            'billSplitPayment'=>0,
+            'billSplitPaymentArgs'=>'',
+            'billPaymentChannel'=>0,
+            'billChargeToCustomer'=>0
+          );
 
-        $billplz = Client::make(config('billplz.billplz_key'), config('billplz.billplz_signature'));
+          $url = 'https://dev.toyyibpay.com/index.php/api/createBill';
+          $response = Http::asForm()->post($url, $option);
+          if ($response->successful()) {
+            $responseData = $response->json();
 
-        if(config('billplz.billplz_sandbox')){
+            if (isset($responseData[0]['BillCode'])) {
+                $billcode = $response[0]['BillCode'];
+                 session(['amount' => $bid->bid_amount]);
+                return redirect('https://dev.toyyibpay.com/' . $billcode);
+            } else {
+                // Handle case where BillCode is not present in the response
+                dd($responseData);
 
-            $billplz->useSandbox();
+                // return response()->json(['error' => 'BillCode not found in response'], 400);
+            }
+        } else {
+            // Handle unsuccessful API response
+            return response()->json(['error' => 'API request failed'], 500);
         }
+    }
 
-        $bill = $billplz->bill();
+    public function paymentStatus()
 
-        $bill = $bill->create(
-            config('billplz.billplz_collection_id'),
-            $request->buyer_name,
-            $request->item_title,
-            \Duit\MYR::given($request->amount),
-            url('/'),
-            'Click testing',
-            ['redirect_url' => url('/redirect')]
-        );
+    {
+        $request = request(); // get the current request instance
+        $amount = session('amount');
+        $validatedData = [
+            'amount' => $amount,
+            'bid_id' => $request->input('order_id'),
+        ];
 
-        return redirect($bill->toArray()['url']);
+        Payment::create($validatedData);
+
+        return redirect()->route('show-bids')->with('success', 'item has been paid!');
+      //  $response = request()->all(['status_id', 'billcode', 'order_id']);
+       // return redirect()->route('profile');
 
     }
 
+    public function callback()
+    {
+        $request = request(); // get the current request instance
 
+        $validatedData = [
+            'amount' => $request->input('amount'),
+            'bid_id' => $request->input('order_id'),
+        ];
 
+        Payment::create($validatedData);
 
+        return redirect()->route('show-bids')->with('success', 'item has been paid!');
+    //     $response = request()->all(['refno','status', 'reason', 'billcode', 'order_id', 'amount']);
+    //     Log::info($response);
+    }
 }

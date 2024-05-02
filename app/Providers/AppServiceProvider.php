@@ -4,6 +4,9 @@ namespace App\Providers;
 
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
+use Nyholm\Psr7\Factory\Psr17Factory;
+use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\StreamFactoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+
     }
 
     /**
@@ -23,4 +26,6 @@ class AppServiceProvider extends ServiceProvider
         //
         Paginator::useBootstrap();
     }
+
+
 }

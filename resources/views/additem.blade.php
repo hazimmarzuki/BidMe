@@ -2,6 +2,30 @@
 
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}" />
+
+    <nav class="navbar navbar-expand-lg navbar-light ">
+        <div class="container-fluid">
+          <div class="collapseNavBar navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav navbar-profile">
+              <li class="nav-item">
+                <a class="nav-link @if (Request::is('/item/create')) active @endif" href="{{ route('create-item') }}">Add New Item</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link @if (Request::is('/purchase-history')) active @endif" href="{{ route('purchase-history') }}">Purchase History</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link @if (Request::is('/sales-history')) active @endif" href="{{ route('sales-history') }}">Sales History</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link @if (Request::is('profile/edit')) active @endif" href="{{ route('edit-profile') }}">Edit Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link @if (Request::is('/bid/status')) active @endif" href="{{ route('show-bids') }}">Bid Status</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     <div class="container-sm">
         <!-- Centering the container and making it smaller -->
         <div>

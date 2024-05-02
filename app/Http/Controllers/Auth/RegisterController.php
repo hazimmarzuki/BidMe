@@ -20,6 +20,7 @@ class RegisterController extends Controller
         $data = $request -> validate ([
             'name' => 'required',
             'email' => 'required|email',
+            'phone' => 'required|tel',
             'password' => 'required|min:6|confirmed'
 
            ]); //

@@ -9,16 +9,19 @@
       <div class="collapseNavBar navbar-collapse" id="navbarNav">
         <ul class="navbar-nav navbar-profile">
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('item/create')) active @endif" href="{{ route('create-item') }}">Add New Item</a>
+            <a class="nav-link @if (Request::is('/item/create')) active @endif" href="{{ route('create-item') }}">Add New Item</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('profile') }}">Purchase History</a>
+            <a class="nav-link @if (Request::is('/purchase-history')) active @endif" href="{{ route('purchase-history') }}">Purchase History</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('profile')) active @endif" href="{{ route('profile') }}">Sales History</a>
+            <a class="nav-link @if (Request::is('/sales-history')) active @endif" href="{{ route('sales-history') }}">Sales History</a>
           </li>
           <li class="nav-item">
             <a class="nav-link @if (Request::is('profile/edit')) active @endif" href="{{ route('edit-profile') }}">Edit Profile</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link @if (Request::is('/bid/status')) active @endif" href="{{ route('show-bids') }}">Bid Status</a>
           </li>
         </ul>
       </div>
@@ -29,7 +32,7 @@
     <!-- Centering the container and making it smaller -->
     <div>
       <!-- Centering the row horizontally -->
-<h1>yooo</h1>
+<h1>Edit your profile </h1>
       @if (session('success'))
       <p class="alert alert-success">{{session('success')}}</p>
       @endif
@@ -73,6 +76,22 @@
 
           </div>
         </div>
+
+        <div class="row mb-3">
+            <label for="phone" class="col-sm-2 col-form-label"
+              >No. Phone</label
+            >
+            <div class="col-sm-10">
+              <input type="tel" pattern="[0-9]{3}[0-9]{2}[0-9]{3}" class="form-control @error('phone') is-invalid @enderror"
+              name="phone"  value="{{Auth::user()->phone }}" />
+
+
+              @error('phone')
+                  <div class="invalid-feedback">{{$message}}</div>
+              @enderror
+
+            </div>
+          </div>
 
 
         <br />

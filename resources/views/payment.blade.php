@@ -34,7 +34,7 @@
       <p class="alert alert-success">{{session('success')}}</p>
       @endif
 
-      <form action="{{ route('payment-process', $bid->id) }}" method="POST">
+      <form action="{{ route('create-payment' , $bid->id) }}" method="POST">
         @csrf
 
 

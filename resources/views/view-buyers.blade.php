@@ -3,8 +3,7 @@
 @section('content')
 <link rel="stylesheet" href="{{ asset('css/viewbuyers.css') }}" />
 
-{{-- <p>Buyers that has been placed their bid for
-<h2>{{ $buyers[0]->item->title}}</h2> --}}
+@if ($buyers->count() > 0)
 <div class="container-lg">
     <p>Buyers that has been placed their bid for
     <h4>{{ $buyers[0]->item->title}}</h4>
@@ -33,6 +32,9 @@
     @endforeach
   </table>
 </div>
+@else
+<div class="container-lg"><h2>There are currently no buyers for this item (yet).</h2></div>
+@endif
 
 
 @endsection

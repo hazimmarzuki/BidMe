@@ -12,10 +12,10 @@
             <a class="nav-link @if (Request::is('/item/create')) active @endif" href="{{ route('create-item') }}">Add New Item</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('profile') }}">Purchase History</a>
+            <a class="nav-link @if (Request::is('/purchase-history')) active @endif" href="{{ route('purchase-history') }}">Purchase History</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('profile') }}">Sales History</a>
+            <a class="nav-link @if (Request::is('/sales-history')) active @endif" href="{{ route('sales-history') }}">Sales History</a>
           </li>
           <li class="nav-item">
             <a class="nav-link @if (Request::is('profile/edit')) active @endif" href="{{ route('edit-profile') }}">Edit Profile</a>
@@ -59,14 +59,16 @@
 
                             <a href="{{route('view-bidders' , $item->id)}}"><em> {{ $item->bids_count}} bids</em></a> <br>
 
-
-                            @if ($item->countdown_date > now())
+                            @php
+                                $timelimit = now()->addMinutes(5);
+                            @endphp
+                            @if ($item->countdown_date > $timelimit)
                             <a type="submit" class="btn btn-primary btn-sm" href= {{route ('edit-item', $item->id)}}
                                 style="margin-right: 10px;"
                                 >Edit</a>
                             @endif
 
-
+                            @if( now() > $item->countown_date && $item->bids->count() == 0)
                             <form action="{{ route('delete-item', $item->id) }}" method="POST" class="d-inline"
                                 onsubmit="return confirm('Are you sure want to delete item titled {{$item->title}}?')">
                             @method('delete')
@@ -75,6 +77,7 @@
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
 
                             </form>
+                            @endif
 
                         </div>
                     </div>

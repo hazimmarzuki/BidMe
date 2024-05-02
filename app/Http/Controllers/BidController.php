@@ -95,6 +95,7 @@ public function showbids()
 {
     $bids = Bid::where('buyer_id', Auth::id())
     ->with('item')
+    ->with('payment')
     ->orderBy('bid_time', 'desc')
     ->get();
 

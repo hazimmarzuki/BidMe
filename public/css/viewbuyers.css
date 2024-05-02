@@ -1,8 +1,20 @@
+
 .container-lg {
     margin-top: 100px;
      min-height: 50vh; /*Center vertically on the page */
     background-color: rgb(255, 255, 255, 0.925); /*Add a semi-transparent white background to make the form more readable */
     padding: 20px;
+  }
+  .navbar-profile {
+    margin-left: 0; /* left the second navbar items horizontally */
+    display: flex;
+    flex-direction: row;
+    background-color:  rgba(
+        255,
+        255,
+        255,
+        0.8
+      );
   }
 
 

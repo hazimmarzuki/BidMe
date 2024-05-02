@@ -28,9 +28,11 @@
         <td>{{ $bid->bid_time }}</td>
 
         @if ($bid->item && $bid->item->countdown_date < now())
-            @if ($bid->bid_amount == $bid->item->price)
-          <td style="background-color: rgb(2, 202, 2); ">Won  <button style="background-color: yellow; float: right;"><a href="{{route('payment', $bid->id)}}">PAY</a></button></td>
-            @else
+        @if ($bid->bid_amount == $bid->item->price && $bid->payment && $bid->payment->bid_id)
+        <td style="background-color: rgb(2, 202, 2); ">Won  <p style="background-color: yellow; float: right;">PAID</p></td>
+        @elseif ($bid->bid_amount == $bid->item->price && !$bid->payment)
+        <td style="background-color: rgb(2, 202, 2);  ">Won  <button style="background-color: yellow; float: right;"><a href="{{ route('payment', $bid->id) }}" class="text-decoration-none">PAY</a></button></td>
+          @else
           <td style="background-color: rgb(216, 2, 2)">Lost</td>
              @endif
         @elseif ($bid->item && $bid->item->countdown_date > now())

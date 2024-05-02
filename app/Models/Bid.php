@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Item;
+use App\Models\Payment;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -24,6 +25,13 @@ class Bid extends Model
 
     public function buyer() {
         return $this->belongsTo(User::class , 'buyer_id' );
+    }
+    public function seller() {
+        return $this->belongsTo(User::class , 'seller_id' );
+    }
+
+    public function payment(){
+        return $this->hasOne(Payment::class);
     }
 
 }

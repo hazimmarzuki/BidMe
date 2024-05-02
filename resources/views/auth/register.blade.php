@@ -56,6 +56,22 @@
             </div>
 
             <div class="row mb-3">
+                <label for="phone" class="col-sm-2 col-form-label"
+                  >No. Phone</label
+                >
+                <div class="col-sm-10">
+                  <input type="tel" pattern="[0-9]{3}[0-9]{2}[0-9]{3}" class="form-control  @error('phone') is-invalid @enderror"
+                  name="phone"  value="{{ old('phone') }}" />
+
+
+                  @error('phone')
+                      <div class="invalid-feedback">{{$message}}</div>
+                  @enderror
+
+                </div>
+              </div>
+
+            <div class="row mb-3">
               <label for="inputPassword" class="col-sm-2 col-form-label"
                 >Password</label
               >

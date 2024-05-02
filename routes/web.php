@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BidController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
@@ -93,7 +94,20 @@ Route::get ('/bid/showbids/', [BidController::class, 'showbids'])
 Route::get ('/payment/{id}', [PaymentController::class, 'showPaymentForm'])
 ->name ('payment')->middleware ('auth');
 
-Route::post ('/paymentprocess/{id}', [PaymentController::class, 'paymentProcess'])
-->name ('payment-process')->middleware ('auth');
+Route::post ('/create-payment/{id}', [PaymentController::class, 'createPayment'])
+->name ('create-payment');
 
+Route::get ('/payment-status', [PaymentController::class, 'paymentStatus'])
+->name ('payment-status');
+
+Route::get('/payment-callback', [PaymentController::class, 'callback'])
+->name('payment-callback');
+
+//history
+
+Route::get ('/purchase-history', [HistoryController::class, 'purchasehistory'])
+->name ('purchase-history')->middleware('auth');
+
+Route::get ('/sales-history', [HistoryController::class, 'saleshistory'])
+->name ('sales-history')->middleware('auth');
 
