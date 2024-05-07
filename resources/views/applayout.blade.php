@@ -9,6 +9,7 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link rel="icon" type="image/png" href="{{ URL::asset('/images/bid.png') }}">
     <!-- custom css file  -->
     <link rel="stylesheet" href="{{asset('css/navbar.css')}}" />
 
