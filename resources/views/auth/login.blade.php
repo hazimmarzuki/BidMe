@@ -53,8 +53,11 @@
             </div>
 
             <br />
-            <button type="submit" class="btn btn-primary">Login</button
+            <div class="text-center" >
+            <button type="reset" class="btn btn-secondary mx-2">Reset</button>
+            <button type="submit" class="btn btn-primary mx-2">Login</button
             ><br /><br />
+            </div>
             <p>Don't have an account? <a href="{{url ('register')}}">Click here!</a></p>
           </form>
         </div>

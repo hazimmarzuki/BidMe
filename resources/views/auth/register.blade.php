@@ -12,7 +12,7 @@
         <!-- Centering the container and making it smaller -->
         <div>
           <!-- Centering the row horizontally -->
-          <h4> Register Account</h4>
+          <h4> Sign Up</h4>
 
 
           <form action="{{ route('register-store')}}" method="POST">
@@ -115,8 +115,11 @@
                 </div>
               </div>
             <br />
-            <button type="submit" class="btn btn-primary">Register</button
+            <div class="text-center">
+            <button type="reset" class="btn btn-secondary mx-2">Reset</button>
+            <button type="submit" class="btn btn-primary mx-2">Sign Up</button
             ><br /><br />
+            </div>
             <p>Already have an account? <a href="{{url ('login')}}">Click here!</a></p>
           </form>
         </div>
