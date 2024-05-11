@@ -47,7 +47,7 @@
         @elseif ($bid->item && $bid->item->countdown_date > now())
         @if ($bid->bid_amount == $highestBid )
         <td style="background-color: rgb(141, 170, 250)">On going (Currently win)
-            </td>
+        </td>
         @else
         <td style="background-color: rgb(141, 170, 250)">On going (Currently lost)
             <button style="float: right" ><a style="text-decoration: none" href="{{route ('bid-view', $bid->item_id)}}">go bid</a></button></td>
