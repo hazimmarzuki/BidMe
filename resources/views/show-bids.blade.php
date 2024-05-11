@@ -46,11 +46,17 @@
              @endif
         @elseif ($bid->item && $bid->item->countdown_date > now())
         @if ($bid->bid_amount == $highestBid )
-        <td style="background-color: rgb(141, 170, 250)">On going (Currently win)
+        <td style="background-color: rgb(141, 170, 250)">On going (Currently win) <br>
+            <div class="countdown-container ">
+                Time :<span id="countdown-{{ $bid->item->id }}"></span>
+             </div>
         </td>
         @else
-        <td style="background-color: rgb(141, 170, 250)">On going (Currently lost)
-            <button style="float: right" ><a style="text-decoration: none" href="{{route ('bid-view', $bid->item_id)}}">go bid</a></button></td>
+        <td style="background-color: rgb(141, 170, 250)">On going (Currently lost) <br>
+            <div class="countdown-container ">
+               Time :<span id="countdown-{{ $bid->item->id }}"></span>
+            </div>
+            <button style="float: right" ><a style="text-decoration: none" href="{{route ('bid-view', $bid->item_id)}}">Go bid</a></button></td>
         @endif
         @endif
       </tr>
@@ -58,6 +64,22 @@
     @endforeach
   </table>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
 
+<script>
+    $(document).ready(function() {
+        @foreach ($bids as $index => $bid)
+            $('#countdown-{{ $bid->item->id }}').countdown('{{ $bid->item->countdown_date->format('Y/m/d H:i:s') }}', function(event) {
+                var $this = $(this);
+                $this.html(event.strftime('%D days %H:%M:%S'));
+
+                if (event.elapsed) {
+                    $this.html('SOLD/EXPIRED');
+                }
+            });
+        @endforeach
+    });
+    </script>
 
 @endsection
