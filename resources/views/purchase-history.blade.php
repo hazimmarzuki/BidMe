@@ -41,10 +41,13 @@
 
       </tr>
     </thead>
+    @php
+        $no = 0;
+    @endphp
     @foreach ($filteredHistory as $index => $info)
     <tbody>
       <tr>
-        <th scope="row">{{ $index +1 }}</th>
+        <th scope="row">{{ $no = $no +1 }}</th>
         <td>{{ $info->item->title  }}</td>
         <td>RM{{ $info->payment->amount }}</td>
         <td>{{ $info->seller->name}}</td>

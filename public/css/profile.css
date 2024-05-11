@@ -19,7 +19,7 @@ body{
   .container-sm {
     margin-top: 100px;
      min-height: 50vh; /*Center vertically on the page */
-    background-color: rgba(139, 231, 238, 0.925); /*Add a semi-transparent white background to make the form more readable */
+    background-color: rgba(253, 253, 253, 0.808); /*Add a semi-transparent white background to make the form more readable */
     padding: 20px;
   }
 

@@ -23,7 +23,16 @@
     <tbody>
       <tr>
         <th scope="row">{{ $index +1 }}</th>
+        @php
+        $highestBid = $bid->where('item_id', $bid->item_id)->max('bid_amount');
+        @endphp
+
+        @if ($bid->item && $bid->item->countdown_date > now())
+        <td><a style="text-decoration: none" href="{{route('bid-view', $bid->item->id)}}">{{ $bid->item ? $bid->item->title : '' }}</a></td>
+        @elseif ($bid->item && $bid->item->countdown_date < now())
         <td>{{ $bid->item ? $bid->item->title : '' }}</td>
+        @endif
+
         <td>RM{{ $bid->bid_amount }}</td>
         <td>{{ $bid->bid_time }}</td>
 
@@ -36,7 +45,13 @@
           <td style="background-color: rgb(216, 2, 2)">Lost</td>
              @endif
         @elseif ($bid->item && $bid->item->countdown_date > now())
-        <td style="background-color: rgb(141, 170, 250)">On going</td>
+        @if ($bid->bid_amount == $highestBid )
+        <td style="background-color: rgb(141, 170, 250)">On going (Currently win)
+            </td>
+        @else
+        <td style="background-color: rgb(141, 170, 250)">On going (Currently lost)
+            <button style="float: right" ><a style="text-decoration: none" href="{{route ('bid-view', $bid->item_id)}}">go bid</a></button></td>
+        @endif
         @endif
       </tr>
     </tbody>
