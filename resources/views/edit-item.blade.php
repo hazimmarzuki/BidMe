@@ -28,7 +28,8 @@
                     <input type="datetime-local" id="countdown_date" name="countdown_date" value="{{ $item->countdown_date }}" required class="form-control">
                 </div>
                 <div class="mb-3">
-                    <label for="image" class="form-label">Upload Image:</label>
+                    <label for="image" class="form-label">Upload Image :</label>
+                    <label style="font-size: 12px">if dont need to change the image leave empty</label>
                     <input type="file" id="image" name="image" accept="image/*" class="form-control">
                 </div>
                 <button type="submit" class="btn btn-primary">Save</button>

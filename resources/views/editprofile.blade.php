@@ -79,7 +79,7 @@
 
         <div class="row mb-3">
             <label for="phone" class="col-sm-2 col-form-label"
-              >No. Phone</label
+              >No. Phone(+60)</label
             >
             <div class="col-sm-10">
               <input type="tel" pattern="[0-9]{3}[0-9]{2}[0-9]{3}" class="form-control @error('phone') is-invalid @enderror"

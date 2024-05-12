@@ -19,10 +19,13 @@
 
       </tr>
     </thead>
+    @php
+    $no = 0;
+    @endphp
     @foreach ($bids as $index => $bid)
     <tbody>
       <tr>
-        <th scope="row">{{ $index +1 }}</th>
+        <th scope="row">{{ $no  = $no +1 }}</th>
         @php
         $highestBid = $bid->where('item_id', $bid->item_id)->max('bid_amount');
         @endphp
