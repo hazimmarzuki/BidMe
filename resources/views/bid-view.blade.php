@@ -25,7 +25,8 @@
                     <label for="title" class="form-label"><strong>Title: {{ $item->title}}</strong></label>
                 </div>
                 <div class="mb-3">
-                    <label for="description" class="form-label"><strong>Description:</strong> {{ $item->description}}</label>
+                    <label for="description" class="form-label"><strong>Description: <br>
+                    </strong> {!! nl2br($item->description) !!}</label>
                 </div>
                 <div class="mb-3">
                     <label for="price" class="form-label"><strong>Current Price: </strong> RM{{ $item->price}}</label>

@@ -48,7 +48,7 @@
     <tbody>
       <tr>
         <th scope="row">{{ $no = $no +1 }}</th>
-        <td>{{ $info->item->title  }}</td>
+        <td><a style="text-decoration: none" href= {{route ('item-view', $info->item->id)}}>{{ $info->item ? $info->item->title : '' }}</a></td>
         <td>RM{{ $info->payment->amount }}</td>
         <td>{{ $info->Buyer->name}}</td>
         <td>{{ $info->payment->created_at}}</td>

@@ -33,9 +33,8 @@
         @if ($bid->item && $bid->item->countdown_date > now())
         <td><a style="text-decoration: none" href="{{route('bid-view', $bid->item->id)}}">{{ $bid->item ? $bid->item->title : '' }}</a></td>
         @elseif ($bid->item && $bid->item->countdown_date < now())
-        <td>{{ $bid->item ? $bid->item->title : '' }}</td>
+        <td><a style="text-decoration: none" href= {{route ('item-view', $bid->item->id)}}>{{ $bid->item ? $bid->item->title : '' }}</a></td>
         @endif
-
         <td>RM{{ $bid->bid_amount }}</td>
         <td>{{ $bid->bid_time }}</td>
 

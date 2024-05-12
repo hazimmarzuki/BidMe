@@ -98,24 +98,10 @@ public function destroy ($id) //delete an item
 
 
 
-// public function bid(Request $request, $id)
-// {
-//     $item = Item::findOrFail($id);
-// if($request->bid > $item->price) {
-//     $validatedData = $request->validate([
-//         'bid' => 'required|numeric|min:0',
-//     ]);
-//     $item->buyer_id = Auth::id();
-//     $item->price = $request->bid;
-//     $item->save();
-
-
-
-//     return redirect()->route('bid-view', $id)->with('success', 'bid placed successfully!');
-
-// }
-// else{
-//     return back()->with('error', 'you need to bid more than the current price');
-// }
-// }
+public function itemview($id)
+    {
+        $item = Item::withCount('bids')
+        ->findOrFail($id);
+        return view('item-view', compact('item'));
+    }
 }

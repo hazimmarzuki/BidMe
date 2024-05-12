@@ -26,8 +26,8 @@ class PaymentController extends Controller
         $option = array(
             'userSecretKey'=> config('toyyibpay.key'),
             'categoryCode'=> config('toyyibpay.category'),
-            'billName'=> $bid->item->title,
-            'billDescription'=>'Try Bid Me',
+            'billName'=> substr($bid->item->title, 0, 30),
+            'billDescription'=>'Bid Me',
             'billPriceSetting'=>1, //0 for fixed amount ,  for user key in data
             'billPayorInfo'=>1,
             'billAmount'=>$bid->bid_amount*100,

@@ -75,6 +75,9 @@ Route::post ('/item/{id}', [ItemController::class, 'update'])
 Route::delete ('/item/{id}', [ItemController::class, 'destroy'])
 -> name ('delete-item')->middleware ('auth');
 
+Route::get ('/item/{id}/view', [ItemController::class, 'itemview'])
+-> name ('item-view') ->middleware ('auth');
+
 //bid
 
 Route::get ('/bid/{id}/view', [BidController::class, 'bidview'])
