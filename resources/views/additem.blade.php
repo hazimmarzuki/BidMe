@@ -60,7 +60,7 @@
                     <label for="image" class="form-label">Upload Image:</label>
                     <input type="file" id="image" name="image" accept="image/*" required class="form-control">
                 </div>
-                <button type="submit" class="btn btn-primary">Create Auction</button>
+                <button type="submit" class="btn btn-primary">Add Item</button>
             </form>
         </div>
     </div>

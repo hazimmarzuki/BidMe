@@ -82,7 +82,7 @@
               >No. Phone(+60)</label
             >
             <div class="col-sm-10">
-              <input type="tel" pattern="[0-9]{3}[0-9]{2}[0-9]{3}" class="form-control @error('phone') is-invalid @enderror"
+              <input type="tel" class="form-control @error('phone') is-invalid @enderror"
               name="phone"  value="{{Auth::user()->phone }}" />
 
 
