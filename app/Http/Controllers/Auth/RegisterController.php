@@ -19,9 +19,9 @@ class RegisterController extends Controller
       // dd($request);
         $data = $request -> validate ([
             'name' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
-            'password' => 'required|min:6|confirmed'
+            'email' => 'required|string|email|max:255|unique:users',
+            'phone' => 'required|unique:users',
+            'password' => 'required|confirmed'
 
            ]); //
 

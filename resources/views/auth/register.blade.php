@@ -60,8 +60,9 @@
                   >No. Phone</label
                 >
                 <div class="col-sm-10">
-                  <input type="tel" class="form-control  @error('phone') is-invalid @enderror"
-                  name="phone"  value="{{ old('phone') }}" />
+                    <input type="number" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);"
+                    class="form-control @error('phone') is-invalid @enderror"
+                    name="phone"  value="{{ old('phone') }}" />
 
 
                   @error('phone')

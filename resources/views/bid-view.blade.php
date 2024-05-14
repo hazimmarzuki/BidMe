@@ -19,7 +19,7 @@
                 @csrf
                 @if ($item->image)
                 <img src="{{ asset($item->image) }}" class="card-img-top" alt="Item Image"
-                style="width: 100%; height: 200px; object-fit: contain;">
+                style="width: 100%; height: 300px; object-fit: contain;">
                 @endif
                 <div class="mb-3">
                     <label for="title" class="form-label"><strong>Title: {{ $item->title}}</strong></label>

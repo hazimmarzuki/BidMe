@@ -9,7 +9,7 @@
       <div class="collapseNavBar navbar-collapse" id="navbarNav">
         <ul class="navbar-nav navbar-profile">
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('/item/create')) active @endif" href="{{ route('create-item') }}">Add New Item</a>
+            <a class="nav-link @if (Request::is('/item/create')) active @endif"  href="{{ route('create-item') }}">Add New Item</a>
           </li>
           <li class="nav-item">
             <a class="nav-link @if (Request::is('/purchase-history')) active @endif" href="{{ route('purchase-history') }}">Purchase History</a>
@@ -39,7 +39,7 @@
         @endif
 
         @if ($items->count() > 0)
-        <h2 class="col-12" style="background-color: #bcd9e8">All Items</h2>
+        <h2 class="col-12" style="background-color: rgb(236, 232, 232)">All Items</h2>
             @foreach ($items as $item)
                 <div class="col-md-4 mb-4">
                     <div class="card" style="height: 400px; overflow-y: auto;">

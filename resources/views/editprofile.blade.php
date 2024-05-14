@@ -82,7 +82,8 @@
               >No. Phone(+60)</label
             >
             <div class="col-sm-10">
-              <input type="tel" class="form-control @error('phone') is-invalid @enderror"
+              <input type="number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
+              class="form-control @error('phone') is-invalid @enderror"
               name="phone"  value="{{Auth::user()->phone }}" />
 
 

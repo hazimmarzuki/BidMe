@@ -16,7 +16,7 @@
 
 
             @if ($items->count() > 0)
-                <h2 class="col-12" style="background-color: #bcd9e8">All Items</h2>
+                <h2 class="col-12" style="background-color: rgb(236, 232, 232);">All Items</h2>
                 {{ $items->links()}}
 
                 @foreach ($items as $item)
