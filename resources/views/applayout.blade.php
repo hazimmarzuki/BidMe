@@ -23,13 +23,13 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="{{ route('show-items') }}">
             <img
-              src="{{URL::asset('/images/bid.png')}}"
+              src="{{URL::asset('/images/bb.png')}}"
               alt=""
               width="30"
               height="24"
               class="d-inline-block align-text-top"
             />
-            <strong> Bid Me</strong>
+            <strong style="margin-left: -3px; color:">id Me</strong>
           </a>
           <div class="collapseNavBar navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
