@@ -58,6 +58,32 @@ class ItemController extends Controller
     return view('showitems', compact('items'));
 }
 
+public function search(Request $request)
+{
+    $search = strtolower($request->input('search'));
+
+    $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
+    $buyer_id = Auth::id();
+
+    $items = Item::where('countdown_date', '>', $currentDateTime )
+    ->where('seller_id', '!=', $buyer_id)
+    ->where(function ($query) use ($search) {
+        $query->whereRaw('LOWER(title) like ?', ["%$search%"])
+            ->orWhereRaw('LOWER(description) like ?', ["%$search%"]);
+    })
+    ->withCount('bids')
+    ->orderBy('countdown_date', 'asc')
+    ->paginate(6);
+
+    if ($items->count() == 0) {
+        return back()->with('error','There are no results for your search.');
+    } else {
+        $success_message = 'Here are the results for your search.';
+        return view('showitems', compact('items', 'success_message'));    }
+
+    // return view('showitems', compact('items'))->with('success', 'Here are the results for your search.');
+}
+
 public function edit($id) //go to edit item form
 {
     $item = Item::findOrFail($id);

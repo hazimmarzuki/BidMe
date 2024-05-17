@@ -3,9 +3,12 @@
 @section('content')
 
     <link rel="stylesheet" href="{{ asset('css/profile.css') }}" />
+
     <div class="container-lg">
+
         <!-- Centering the container and making it smaller -->
         <div class="row">
+
             <!-- Centering the row horizontally -->
             @if (session('success'))
                 <div class="col-12">
@@ -13,14 +16,30 @@
                 </div>
             @endif
 
+            @if (session('error'))
+            <div class="col-12">
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            </div>
+            @endif
+
+            @if (isset($success_message))
+           <div class="alert alert-success">{{ $success_message }}</div>
+            @endif
+
 
 
             @if ($items->count() > 0)
-                <h2 class="col-12" style="background-color: rgb(236, 232, 232);">All Items</h2>
+                <h2 class="col-12" style="color : white">All Items</h2>
                 {{ $items->links()}}
-
+                <form class="d-flex" action="{{ route('search-item') }}" method="get" style="margin: 20px 20px 20px 0">
+                    @csrf
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                  </form>
                 @foreach ($items as $item)
                     <div class="col-md-4 mb-4">
+
+
                         <div class="card" style="height: 400px; overflow-y: auto;">
                             @if ($item->image)
                                 <img src="{{ asset($item->image) }}" class="card-img-top" alt="Item Image"

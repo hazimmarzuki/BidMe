@@ -2,8 +2,8 @@
   /* form  */
 
 body {
-    background-color: rgb(0, 9, 28);
-    /* background: url(../images/bb.jpg) no-repeat center center fixed; */
+    /* background-color: rgb(0, 9, 28); */
+    background: url(../images/bid.jpg) no-repeat center center fixed;
     background-size: cover;
     font-family: 'Montserrat';
   }

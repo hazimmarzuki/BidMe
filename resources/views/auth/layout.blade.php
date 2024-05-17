@@ -17,13 +17,13 @@
         <div class="container-fluid">
           <a class="navbar-brand" href="{{ route('show-items') }}">
             <img
-              src="{{URL::asset('/images/bb.png')}}"
-              alt=""
-              width="30"
-              height="24"
-              class="d-inline-block align-text-top"
+            src="{{URL::asset('/images/bb.png')}}"
+            alt=""
+            width="30"
+            height="24"
+            class="d-inline-block align-text-top"
             />
-            <strong style="margin-left: -3px; color:">id Me</strong>
+            <strong style="margin-left: -3px; ">id Me</strong>
           </a>
         </div>
       </nav>
