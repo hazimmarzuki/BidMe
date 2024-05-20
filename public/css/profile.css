@@ -1,9 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
-  /* form  */
+/* @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 body{
     font-family: 'Montserrat';
-    /* font-weight: 500; */
-}
+} */
   .navbar-profile {
     margin-left: 0; /* left the second navbar items horizontally */
     display: flex;

@@ -80,8 +80,6 @@ public function search(Request $request)
     } else {
         $success_message = 'Here are the results for your search.';
         return view('showitems', compact('items', 'success_message'));    }
-
-    // return view('showitems', compact('items'))->with('success', 'Here are the results for your search.');
 }
 
 public function edit($id) //go to edit item form

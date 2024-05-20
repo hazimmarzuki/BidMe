@@ -16,8 +16,7 @@
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
           <a class="navbar-brand" href="{{ route('show-items') }}">
-            <img
-            src="{{URL::asset('/images/bb.png')}}"
+            <img      src="{{URL::asset('/images/bb.png')}}"
             alt=""
             width="30"
             height="24"

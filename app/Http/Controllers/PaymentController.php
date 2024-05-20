@@ -77,8 +77,6 @@ class PaymentController extends Controller
         Payment::create($validatedData);
 
         return redirect()->route('show-bids')->with('success', 'item has been paid!');
-      //  $response = request()->all(['status_id', 'billcode', 'order_id']);
-       // return redirect()->route('profile');
 
     }
 
@@ -94,7 +92,6 @@ class PaymentController extends Controller
         Payment::create($validatedData);
 
         return redirect()->route('show-bids')->with('success', 'item has been paid!');
-    //     $response = request()->all(['refno','status', 'reason', 'billcode', 'order_id', 'amount']);
-    //     Log::info($response);
+
     }
 }

@@ -83,12 +83,7 @@ public function viewbuyers( $id )
     ->orderBy('bid_amount', 'desc')->get();
 
     return view('view-buyers', compact('buyers'));
-    // $bid = Bid::where('item_id', $id)
-    // ->with('bidders');
 
-    // $bidders = $bid->bidders;
-
-    // return view('viewbidders', compact('bidders'));
 }
 
 public function showbids()
