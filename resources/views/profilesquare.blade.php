@@ -39,7 +39,24 @@
         @endif
 
         @if ($items->count() > 0)
-        <h2 class="col-12" style="background-color: rgb(236, 232, 232)">All Items</h2>
+        <h2 class="col-12" style="background-color: rgb(236, 232, 232)">All Items
+
+            {{-- profile list --}}
+            <a href="#">
+            <span class="material-symbols-outlined"
+            style="float: right; font-size: 36px; color:black;">
+            list
+            </span>
+            </a>
+            {{-- profile square --}}
+            <a href="#">
+            <span class="material-symbols-outlined"
+            style="float: right; font-size: 36px; padding-right:1%; color:black;">
+                capture
+            </span>
+            </a>
+        </h2>
+
             @foreach ($items as $item)
                 <div class="col-md-4 mb-4">
                     <div class="card" style="height: 400px; overflow-y: auto;">

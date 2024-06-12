@@ -15,7 +15,7 @@ class ProfileController extends Controller
         ->with('bids')
         ->withCount('bids')
         ->orderBy('countdown_date', 'asc')->paginate(6);
-        return view('profile', compact('items'));
+        return view('profilesquare', compact('items'));
 
     }
 

@@ -9,6 +9,7 @@
       integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="icon" type="image/png" href="{{ URL::asset('/images/b.png') }}">
     <!-- custom css file  -->
     <link rel="stylesheet" href="{{asset('css/navbar.css')}}" />
@@ -38,7 +39,7 @@
                     <a class="nav-link @if (Request::is('/')) active @endif" href="{{ route('show-items') }}">BID</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link @if (Request::is('profile')) active @endif" href="{{ route('profile') }}">PROFILE</a>
+                    <a class="nav-link @if (Request::is('profile-square')) active @endif" href="{{ route('profile-square') }}">PROFILE</a>
                   </li>
                   <li class="nav-item">
 
