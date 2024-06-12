@@ -26,7 +26,7 @@
             src="{{URL::asset('/images/bb.png')}}"
             alt=""
             width="30"
-            height="24"
+            height="27"
             class="d-inline-block align-text-top"
           />
           <strong style="margin-left: -3px">id Me</strong>
@@ -61,7 +61,7 @@
           src="{{URL::asset('/images/bb.png')}}"
           alt=""
           width="30"
-          height="24"
+          height="27"
           class="d-inline-block align-text-top"
         />
         <strong style="margin-left: -3px">id Me</strong>

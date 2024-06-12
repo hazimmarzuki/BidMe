@@ -40,7 +40,7 @@ Route::get('/login', [LoginController::class, 'index' ]) -> name ('login');
 
 Route::post('/login', [LoginController::class, 'store' ]) -> name ('login-store');
 
-Route::post('/logout', [LogoutController::class, 'store' ]) -> name ('logout');
+Route::post('/logout', [LogoutController::class, 'logout' ]) -> name ('logout');
 
 
 Route::get('/dashboard', [DashboardController::class, 'index' ])
