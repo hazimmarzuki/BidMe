@@ -42,7 +42,7 @@ class ItemController extends Controller
 
         Item::create($validatedData);
 
-        return redirect()->route('profile')->with('success', 'item created successfully!');
+        return redirect()->route('profile-square')->with('success', 'item created successfully!');
     }
 
     public function index() //show all items
@@ -117,7 +117,7 @@ public function destroy ($id) //delete an item
     unlink($item->image);
     $item->delete();
 
-    return redirect()->route('profile')->with('success', 'item deleted successfully!');
+    return redirect()->route('profile-square')->with('success', 'item deleted successfully!');
 }
 
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     //
-    public function index(){
+    public function indexSquare(){
         $seller_id = Auth::id();
         $items = Item::where('seller_id', $seller_id)
         ->with('bids')
@@ -18,6 +18,18 @@ class ProfileController extends Controller
         return view('profilesquare', compact('items'));
 
     }
+
+    public function indexList(){
+        $seller_id = Auth::id();
+        $items = Item::where('seller_id', $seller_id)
+        ->with('bids')
+        ->withCount('bids')
+        ->orderBy('countdown_date', 'asc')
+        ->get();
+        return view('profilelist', compact('items'));
+
+    }
+
 
     public function editprofile(){
 

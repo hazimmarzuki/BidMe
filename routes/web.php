@@ -47,8 +47,11 @@ Route::get('/dashboard', [DashboardController::class, 'index' ])
 -> name ('dashboard')->middleware ('auth');
 
 //profile
-Route::get('/profile-square', [ProfileController::class, 'index' ]) // show all items of the user
+Route::get('/profile-square', [ProfileController::class, 'indexSquare' ]) // show all items of the user
 -> name ('profile-square')->middleware ('auth');
+
+Route::get('/profile-list', [ProfileController::class, 'indexList' ]) // show all items of the user
+-> name ('profile-list')->middleware ('auth');
 
 Route::get('/profile/edit', [ProfileController::class, 'editprofile' ])
 -> name ('edit-profile')->middleware ('auth');

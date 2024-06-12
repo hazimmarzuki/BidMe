@@ -57,53 +57,76 @@
             </a>
         </h2>
 
-            @foreach ($items as $item)
-                <div class="col-md-4 mb-4">
-                    <div class="card" style="height: 400px; overflow-y: auto;">
-                        @if ($item->image)
-                            <img src="{{ asset($item->image) }}" class="card-img-top" alt="Item Image"
-                            style="width: 100%; height: 200px; object-fit: contain;">
-                        @endif
-                        <div class="card-body">
-                            <h5 class="card-title"><strong>{{ $item->title }}</strong></h5>
-                            <p class="card-text"><strong>Current Price:</strong> RM{{ $item->price }}</p>
-                            <strong>Time remaining:</strong>
-                            <div class="countdown-container d-inline">
-                                <span id="countdown-{{ $item->id }}"></span>
-                            </div>
-                            <br>
 
-                            <a href="{{route('view-bidders' , $item->id)}}"><em> {{ $item->bids_count}} bids</em></a> <br>
+        <div class="container-lg-list">
+            <p>Items that you already sell, </p>
+            <h4>{{ Auth::user()->name}}</h4>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">No.</th>
+                <th scope="col">Item name</th>
+                <th scope="col">Item price</th>
+                <th scope="col">Time remaining</th>
+                <th scope="col">List of buyer</th>
+                <th scope="col">Edit?Delete</th>
 
-                            @php
-                                $timelimit = now()->addMinutes(5);
-                            @endphp
-                            @if ($item->countdown_date > $timelimit)
-                            <a type="submit" class="btn btn-primary btn-sm" href= {{route ('edit-item', $item->id)}}
-                                style="margin-right: 10px;"
-                                >Edit</a>
 
-                            <form action="{{ route('delete-item', $item->id) }}" method="POST" class="d-inline"
-                                onsubmit="return confirm('Are you sure want to delete item titled {{$item->title}}?')">
-                            @method('delete')
-                            @csrf
-
-                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-
-                            </form>
-                            @endif
-
-                        </div>
+              </tr>
+            </thead>
+            @php
+            $no = 0;
+            @endphp
+            @foreach ($items as $item )
+            <tbody>
+              <tr>
+                <th scope="row">{{ $no = $no +1 }}</th>
+                <td><a style="text-decoration: none; color:black;" href= {{route ('item-view', $item->id)}}>{{ $item->title }}</a></td>
+                <td>RM{{ $item->price }}</td>
+                <td>
+                    <div class="countdown-container d-inline">
+                        <span id="countdown-{{ $item->id }}"></span>
                     </div>
-                </div>
+                </td>
+                <td>
+                    <a href="{{route('view-bidders' , $item->id)}}"><em> {{ $item->bids_count}} bids</em></a>
+                </td>
+                <td>
+                @php
+                    $timelimit = now()->addMinutes(5);
+                @endphp
+
+                @if ($item->countdown_date > $timelimit)
+
+                    <a type="submit" class="btn btn-primary btn-sm" href= {{route ('edit-item', $item->id)}}
+                        style="margin-right: 10px;"
+                        >Edit</a>
+
+
+
+                <form action="{{ route('delete-item', $item->id) }}" method="POST" class="d-inline"
+                    onsubmit="return confirm('Are you sure want to delete item titled {{$item->title}}?')">
+                @method('delete')
+                @csrf
+
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+
+                </form>
+                @endif
+                </td>
+
+              </tr>
+            </tbody>
             @endforeach
+          </table>
+        </div>
+
         @else
             <div class="container-sm ">
                 <h2 class="col-12">You do not sell any item yet!</h2>
             </div>
         @endif
     </div>
-    {{ $items->links()}}
 
 </div>
 

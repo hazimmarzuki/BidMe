@@ -18,6 +18,11 @@ body{
     padding: 20px;
   }
 
+  .container-lg-list{
+     min-height: 50vh; /*Center vertically on the page */
+    background-color: rgba(255, 255, 255, 0.925); /*Add a semi-transparent white background to make the form more readable */
+    padding: 20px;
+  }
 
   /* Smaller container */
   /* @media (min-width: 768px) {
