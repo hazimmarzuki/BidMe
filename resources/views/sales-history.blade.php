@@ -27,37 +27,43 @@
     </div>
   </nav>
 
-<div class="container-lg">
-    <p>Items that you already sell, </p>
-    <h4>{{ Auth::user()->name}}</h4>
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">No.</th>
-        <th scope="col">Item name</th>
-        <th scope="col">Item price</th>
-        <th scope="col">Buyer name</th>
-        <th scope="col">Payment date</th>
+<div class="container-lg mt-4">
+    <div class="text-center mb-4">
+        <h4>{{ Auth::user()->name }}</h4>
+        <p>Items that you have sold:</p>
+    </div>
 
-      </tr>
-    </thead>
-    @php
-    $no = 0;
-    @endphp
-    @foreach ($filteredHistory as $index => $info)
-    <tbody>
-      <tr>
-        <th scope="row">{{ $no = $no +1 }}</th>
-        <td><a style="text-decoration: none" href= {{route ('item-view', $info->item->id)}}>{{ $info->item ? $info->item->title : '' }}</a></td>
-        <td>RM{{ $info->payment->amount }}</td>
-        <td>{{ $info->Buyer->name}}</td>
-        <td>{{ $info->payment->created_at}}</td>
-
-      </tr>
-    </tbody>
-    @endforeach
-  </table>
+    @if ($filteredHistory->isEmpty())
+        <div class="alert alert-info text-center">
+            You haven't sold any items yet.
+        </div>
+    @else
+        <table class="table table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Item Name</th>
+                    <th scope="col">Item Price</th>
+                    <th scope="col">Buyer Name</th>
+                    <th scope="col">Payment Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($filteredHistory as $index => $info)
+                    <tr>
+                        <th scope="row">{{ $index + 1 }}</th>
+                        <td>
+                            <a href="{{ route('item-view', $info->item->id) }}" style="text-decoration: none; color: inherit;">
+                                {{ $info->item->title }}
+                            </a>
+                        </td>
+                        <td>RM{{ number_format($info->payment->amount, 2) }}</td>
+                        <td>{{ $info->Buyer->name }}</td>
+                        <td>{{ $info->payment->created_at->format('d M Y, H:i') }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endif
 </div>
-
-
 @endsection

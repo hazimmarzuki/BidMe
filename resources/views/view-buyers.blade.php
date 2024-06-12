@@ -7,7 +7,7 @@
 <div class="container-lg">
     <p>Buyers that has been placed their bid for
     <h4>{{ $buyers[0]->item->title}}</h4>
-<table class="table">
+<table class="table table-striped table-hover">
     <thead>
       <tr>
         <th scope="col">No.</th>
