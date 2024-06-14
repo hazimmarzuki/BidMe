@@ -29,13 +29,37 @@
 
 
             @if ($items->count() > 0)
-                <h2 class="col-12" style="color : white">All Items</h2>
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                <h2 class="p-2 rounded" style="color:  rgb(236, 232, 232);">
+                    All Items
+                </h2>
+                <div>
+                    {{-- showitems list --}}
+                    <a href="{{ route('show-items-list') }}">
+                        <span class="material-symbols-outlined" style="font-size: 36px; color:rgba(255, 255, 255, 0.568); ">
+                            list
+                        </span>
+                    </a>
+                    {{-- showitems square --}}
+                    <a href="{{ route('show-items-square') }}">
+                        <span class="material-symbols-outlined" style="font-size: 36px; padding-right:1%; color:rgb(255, 243, 243);">
+                            capture
+                        </span>
+                    </a>
+                </div>
+                <div class="w-100"></div> <!-- Add this empty div to create a new line -->
+                <div class="w-100">
+                    <form class="d-flex" action="{{ route('search-item') }}" method="get" style="margin: 20px 20px 20px 0; padding: 0;">
+                        @csrf
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" style="height: 38px; font-size: 16px; width: 100%;"><!-- Adjust the width here -->
+                        <button class="btn btn-primary" type="submit" style="height: 38px; font-size: 16px;">Search</button>
+                    </form>
+                </div>
+            </div>
                 {{ $items->links()}}
-                <form class="d-flex" action="{{ route('search-item') }}" method="get" style="margin: 20px 20px 20px 0">
-                    @csrf
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                    <button class="btn btn-primary" type="submit">Search</button>
-                  </form>
+
+
+
                   @foreach ($items as $item)
                   <div class="col-md-4 mb-4">
                       <div class="card h-100">

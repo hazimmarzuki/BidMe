@@ -60,8 +60,11 @@ Route::post('/profile/{id}', [ProfileController::class, 'updateprofile' ])
 -> name ('update-profile')->middleware ('auth');
 
 //item
-Route::get('/', [ItemController::class, 'index' ])
--> name ('show-items');
+Route::get('/', [ItemController::class, 'indexSquare' ])
+-> name ('show-items-square');
+
+Route::get('/items-list', [ItemController::class, 'indexList' ])
+-> name ('show-items-list');
 
 Route::get('/item/create', [ItemController::class, 'create' ])
 -> name ('create-item')->middleware ('auth');

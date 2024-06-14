@@ -45,7 +45,7 @@ class ItemController extends Controller
         return redirect()->route('profile-square')->with('success', 'item created successfully!');
     }
 
-    public function index() //show all items
+    public function indexSquare() //show all items
 {
     $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
     $buyer_id = Auth::id();
@@ -55,8 +55,24 @@ class ItemController extends Controller
     ->withCount('bids')
     ->orderBy('countdown_date', 'asc')
     ->paginate(6);
-    return view('showitems', compact('items'));
+    return view('showitemssquare', compact('items'));
 }
+
+public function indexList() //show all items
+{
+    $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
+    $buyer_id = Auth::id();
+
+    $items = Item::where('countdown_date', '>', $currentDateTime )
+    ->where('seller_id', '!=', $buyer_id)
+    ->withCount('bids')
+    ->orderBy('countdown_date', 'asc')
+    ->get();
+    return view('showitemslist', compact('items'));
+}
+
+
+
 
 public function search(Request $request)
 {

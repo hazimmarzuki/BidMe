@@ -41,4 +41,28 @@
     font-weight: bold;
   }
 
+/*
+  .table img.img-thumbnail {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+} */
+
+/* .table th, .table td {
+    vertical-align: middle;
+    text-align: center;
+} */
+
+.table th {
+    width: 5%; /* Adjust as necessary */
+}
+
+.table td:nth-child(2) {
+    width: 15%; /* Adjust as necessary */
+}
+
+.table td:nth-child(3) {
+    width: 80%; /* Adjust as necessary */
+}
+
 

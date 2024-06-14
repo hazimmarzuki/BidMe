@@ -22,7 +22,7 @@
       @auth
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-          <a class="navbar-brand" href="{{ route('show-items') }}">
+          <a class="navbar-brand" href="{{ route('show-items-square') }}">
             <img
             src="{{URL::asset('/images/bb.png')}}"
             alt=""
@@ -36,7 +36,7 @@
           <div class="collapseNavBar navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link @if (Request::is('/')) active @endif" href="{{ route('show-items') }}">BID</a>
+                    <a class="nav-link @if (Request::is('/')) active @endif" href="{{ route('show-items-square') }}">BID</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link @if (Request::is('profile-square')) active @endif" href="{{ route('profile-square') }}">PROFILE</a>

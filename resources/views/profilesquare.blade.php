@@ -36,7 +36,7 @@
     @if ($items->count() > 0)
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="p-2 rounded" style="background-color:  rgb(236, 232, 232);">
+        <h2 class="p-2 rounded" style="color:  rgb(236, 232, 232);">
             All Items
         </h2>
         <div>

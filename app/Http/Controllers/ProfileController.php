@@ -14,7 +14,7 @@ class ProfileController extends Controller
         $items = Item::where('seller_id', $seller_id)
         ->with('bids')
         ->withCount('bids')
-        ->orderBy('countdown_date', 'asc')->paginate(6);
+        ->orderBy('countdown_date', 'desc')->paginate(6);
         return view('profilesquare', compact('items'));
 
     }
@@ -24,7 +24,7 @@ class ProfileController extends Controller
         $items = Item::where('seller_id', $seller_id)
         ->with('bids')
         ->withCount('bids')
-        ->orderBy('countdown_date', 'asc')
+        ->orderBy('countdown_date', 'desc')
         ->get();
         return view('profilelist', compact('items'));
 
