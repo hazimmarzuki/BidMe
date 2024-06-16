@@ -7,7 +7,9 @@
     <div class="row align-items-start">
         <div class="col-md-6 order-md-1">
             @if ($item->image)
-            <img src="{{ asset($item->image) }}" class="img-fluid rounded" alt="Item Image">
+            <div class="image-container">
+                <img src="{{ asset($item->image) }}" class="img-fluid rounded" alt="Item Image">
+            </div>
             @endif
         </div>
 
@@ -20,7 +22,15 @@
                 <p class="alert alert-danger">{{ session('error') }}</p>
             @endif
 
-            <h3 class="mb-3"><strong>{{ $item->title }}</strong></h3>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h3><strong>{{ $item->title }}</strong></h3>
+                <div>
+                    <strong>Time remaining:</strong>
+                    <div class="countdown-container d-inline">
+                        <span id="countdown-{{ $item->id }}"></span>
+                    </div>
+                </div>
+            </div>
 
             <div class="mb-3">
                 <label for="description" class="form-label"><h4><strong>Description:</strong></h4></label>
@@ -29,13 +39,6 @@
 
             <div class="mb-3">
                 <label for="price" class="form-label"><h4><strong>Current Price:</strong></h4> <h5>RM{{ $item->price }}</h5></label>
-            </div>
-
-            <div class="mb-3">
-                <strong>Time remaining:</strong>
-                <div class="countdown-container d-inline">
-                    <span id="countdown-{{ $item->id }}"></span>
-                </div>
             </div>
 
             <form method="POST" action="{{ route('bid-item', $item->id) }}" enctype="multipart/form-data">
@@ -74,6 +77,23 @@
         </div>
     </div>
 </div>
+
+<style>
+    .image-container {
+        width: 100%;
+        height: 410px; /* Set your desired fixed height */
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures the image covers the container while maintaining aspect ratio */
+    }
+</style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>

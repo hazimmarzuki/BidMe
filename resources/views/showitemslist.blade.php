@@ -12,7 +12,7 @@
     @endif
 
     @if ($items->count() > 0)
-    <div class="d-flex flex-wrap justify-content-between align-items-center">
+    <div class="d-flex flex-wrap justify-content-between align-items-center mt-1">
         <h2 class="p-2 rounded" style="color:  rgb(236, 232, 232);">
             All Items
         </h2>

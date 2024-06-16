@@ -94,6 +94,19 @@
             </div>
           </div>
 
+          <div class="row mb-3">
+            <label for="address" class="col-sm-2 col-form-label"
+              >Address</label
+            >
+            <div class="col-sm-10">
+
+                <textarea id="address" name="address" required
+                    class="form-control">{{Auth::user()->address}}
+                </textarea>
+
+            </div>
+          </div>
+
 
         <br />
         <button type="submit" class="btn btn-primary">UPDATE</button

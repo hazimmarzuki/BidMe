@@ -47,7 +47,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description:</label>
-                    <textarea id="description" name="description" required class="form-control">{{ old('description') ?? '' }}</textarea>                </div>
+                    <textarea id="description" name="description" required class="form-control">{{ old('description') ?? '' }}</textarea>
+                </div>
                 <div class="mb-3">
                     <label for="price" class="form-label">Starting Price RM:</label>
                     <input type="text" id="price" name="price" value="{{ old('price') }}" required class="form-control">

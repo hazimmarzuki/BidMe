@@ -71,7 +71,17 @@
 
                 </div>
               </div>
+            <div class="row mb-3">
+                <label for="address" class="col-sm-2 col-form-label">Address</label>
+               <div class="col-sm-10">
 
+                <textarea id="address" name="address" required
+                    class="form-control">
+                    {{ old('address') ?? '' }}
+                </textarea>
+
+               </div>
+            </div>
             <div class="row mb-3">
               <label for="inputPassword" class="col-sm-2 col-form-label"
                 >Password</label
@@ -84,17 +94,9 @@
                    name="password"
                   value="{{ old ('password') }}"
                 />
-
-
-
-
                 @error('password')
                 <div class="invalid-feedback">{{$message}}</div>
                 @enderror
-
-
-
-
               </div>
             </div>
             <div class="row mb-3">
