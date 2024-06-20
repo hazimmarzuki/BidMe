@@ -45,6 +45,7 @@
                     <th scope="col">Item Name</th>
                     <th scope="col">Item Price</th>
                     <th scope="col">Buyer Name</th>
+                    <th scope="col">Buyer Address</th>
                     <th scope="col">Payment Date</th>
                 </tr>
             </thead>
@@ -59,6 +60,7 @@
                         </td>
                         <td>RM{{ number_format($info->payment->amount, 2) }}</td>
                         <td>{{ $info->Buyer->name }}</td>
+                        <td>{{ $info->Buyer->address }}</td>
                         <td>{{ $info->payment->created_at->format('d M Y, H:i') }}</td>
                     </tr>
                 @endforeach

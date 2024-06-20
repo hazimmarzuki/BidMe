@@ -7,7 +7,9 @@
         <div class="row align-items-start">
             <div class="col-md-6 order-md-1">
                 @if ($item->image)
+                <div class="image-container">
                     <img src="{{ asset($item->image) }}" class="img-fluid rounded" alt="Item Image">
+                </div>
                 @endif
             </div>
 

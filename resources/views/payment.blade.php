@@ -12,10 +12,10 @@
             <a class="nav-link @if (Request::is('item/create')) active @endif" href="{{ route('create-item') }}">Add New Item</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('profile') }}">Purchase History</a>
+            <a class="nav-link @if (Request::is('register')) active @endif" href="{{ route('purchase-history') }}">Purchase History</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link @if (Request::is('profile')) active @endif" href="{{ route('profile') }}">Sales History</a>
+            <a class="nav-link @if (Request::is('profile')) active @endif" href="{{ route('sales-history') }}">Sales History</a>
           </li>
           <li class="nav-item">
             <a class="nav-link @if (Request::is('profile/edit')) active @endif" href="{{ route('edit-profile') }}">Edit Profile</a>

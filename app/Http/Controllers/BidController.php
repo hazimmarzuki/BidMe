@@ -69,7 +69,7 @@ public function bid(Request $request, $id) // update item price and create/ovewr
         $item->price = $request->bid;
         $item->save();
 
-        return redirect()->route('show-items')->with('success', 'bid placed successfully!');
+        return redirect()->route('show-items-square')->with('success', 'bid placed successfully!');
     } else {
         return back()->with('error', 'Oops! Your bid must be at least the minimum price stated. Try again!');
     }

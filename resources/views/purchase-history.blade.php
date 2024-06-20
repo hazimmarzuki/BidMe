@@ -33,6 +33,12 @@
             <p>Items that you have purchased:</p>
         </div>
 
+        @if ($filteredHistory -> isEmpty())
+          <div class="alert alert-info text-center">
+            You haven't purchased any items yet.
+          </div>
+        @else
+
         <table class="table table-striped table-hover">
             <thead>
                 <tr>
@@ -56,5 +62,6 @@
                 @endforeach
             </tbody>
         </table>
+        @endif
     </div>
 @endsection
