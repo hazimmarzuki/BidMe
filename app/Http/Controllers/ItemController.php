@@ -23,6 +23,7 @@ class ItemController extends Controller
 
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
+            'category' => 'required',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'countdown_date' => 'required|date_format:Y-m-d\TH:i|after:now',
@@ -55,7 +56,10 @@ class ItemController extends Controller
     ->withCount('bids')
     ->orderBy('countdown_date', 'asc')
     ->paginate(6);
-    return view('showitemssquare', compact('items'));
+
+    $category = session()->get('category', 'All Items'); // retrieve the selected category from session
+
+    return view('showitemssquare', compact('items', 'category'));
 }
 
 public function indexList() //show all items
@@ -76,26 +80,40 @@ public function indexList() //show all items
 
 public function search(Request $request)
 {
-    $search = strtolower($request->input('search'));
+    $request->validate([
+        'search' => 'nullable|string',
+        'category' => 'required|string',
+    ]);
+
+    $search = $request->input('search');
+    $category = $request->input('category');
+    session()->put('category', $category); // store the selected category in session
 
     $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
     $buyer_id = Auth::id();
 
-    $items = Item::where('countdown_date', '>', $currentDateTime )
-    ->where('seller_id', '!=', $buyer_id)
-    ->where(function ($query) use ($search) {
-        $query->whereRaw('LOWER(title) like ?', ["%$search%"])
-            ->orWhereRaw('LOWER(description) like ?', ["%$search%"]);
-    })
-    ->withCount('bids')
-    ->orderBy('countdown_date', 'asc')
-    ->paginate(6);
+    $items = Item::where('countdown_date', '>', $currentDateTime)
+        ->where('seller_id', '!=', $buyer_id);
+
+    if ($search) {
+        $items->where(function ($query) use ($search) {
+            $query->where('title', 'like', "%$search%")
+                ->orWhere('description', 'like', "%$search%");
+        });
+    }
+
+    $items->when($category != 'All Items', function ($query) use ($category) {
+        $query->where('category', $category);
+    });
+
+    $items = $items->withCount('bids')
+        ->orderBy('countdown_date', 'asc')
+        ->paginate(6);
 
     if ($items->count() == 0) {
-        return back()->with('error','There are no results for your search.');
+        return redirect()->back()->withInput()->with('error', 'There are no results for your search.');
     } else {
-        $success_message = 'Here are the results for your search.';
-        return view('showitems', compact('items', 'success_message'));    }
+        return view('showitemssquare', compact('items', 'category'))->with('success', 'Here are the results for your search.');    }
 }
 
 public function edit($id) //go to edit item form
@@ -111,6 +129,7 @@ public function update(Request $request, $id) //update the edited item
 
 
     $item->title = $request->title;
+    $item->category = $request->category;
     $item->description = $request->description;
     $item->price = $request->price;
     $item->countdown_date = $request->countdown_date;
@@ -123,7 +142,7 @@ public function update(Request $request, $id) //update the edited item
 
 $item->save();
 
-return back()->with('success', 'item updated successfully');
+return redirect()->route('profile-square')->with('success', 'Item updated successfully');
 
 }
 public function destroy ($id) //delete an item

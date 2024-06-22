@@ -12,8 +12,19 @@
             <form method="POST" action="{{ route('update-item' , $item->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
-                    <label for="title" class="form-label">Auction Title:</label>
+                    <label for="title" class="form-label">Item's name:</label>
                     <input type="text" id="title" name="title" value="{{ $item->title}}"required class="form-control">
+                </div>
+                <div class="mb-3">
+                    <select class="form-select" aria-label="category" name="category">
+                        <option selected value="{{ $item->category }}">{{ $item->category }}</option>
+                        <option value="Home & Living" {{ $item->category == 'Home & Living' ? 'hidden' : '' }}>Home & Living</option>
+                        <option value="Fashion" {{ $item->category == 'Fashion' ? 'hidden' : '' }}>Fashion</option>
+                        <option value="Lifestyle" {{ $item->category == 'Lifestyle' ? 'hidden' : '' }}>Lifestyle</option>
+                        <option value="Electronics" {{ $item->category == 'Electronics' ? 'hidden' : '' }}>Electronics</option>
+                        <option value="Health & Beauty" {{ $item->category == 'Health & Beauty' ? 'hidden' : '' }}>Health & Beauty</option>
+                        <option value="Baby & Toys" {{ $item->category == 'Baby & Toys' ? 'hidden' : '' }}>Baby & Toys</option>
+                    </select>
                 </div>
                 <div class="mb-3">
                     <label for="description" class="form-label">Description:</label>

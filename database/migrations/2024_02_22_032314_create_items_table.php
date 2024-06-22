@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('items', function (Blueprint $table) {
             $table->id();
             $table->string('title');
+            $table->string('category');
             $table->text('description');
             $table->decimal('price', 10, 2);
             $table->datetime('countdown_date');

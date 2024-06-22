@@ -11,6 +11,12 @@
         <div class="alert alert-success mt-3">{{ session('success') }}</div>
     @endif
 
+    @if (session('error'))
+    <div class="col-12">
+        <div class="alert alert-danger">{{ session('error') }}</div>
+    </div>
+    @endif
+
     @if ($items->count() > 0)
     <div class="d-flex flex-wrap justify-content-between align-items-center mt-1">
         <h2 class="p-2 rounded" style="color:  rgb(236, 232, 232);">
@@ -34,8 +40,19 @@
         <div class="w-100">
             <form class="d-flex" action="{{ route('search-item') }}" method="get" style="margin: 20px 20px 20px 0; padding: 0;">
                 @csrf
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" style="height: 38px; font-size: 16px; width: 100%;"><!-- Adjust the width here -->
-                <button class="btn btn-primary" type="submit" style="height: 38px; font-size: 16px;">Search</button>
+                <div class="input-group" style="width: 100%;">
+                    <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search" style="height: 38px; font-size: 16px; width: 70%;">
+                    <select class="form-select" aria-label="category" name="category" style="width: 5%; margin-right: 5px;">
+                        <option selected value="All Items">All Items</option>
+                        <option value="Home & Living">Home & Living</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Lifestyle">Lifestyle</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Health & Beauty">Health & Beauty</option>
+                        <option value="Baby & Toys">Baby & Toys</option>
+                    </select>
+                    <button class="btn btn-primary" type="submit" style="height: 38px; font-size: 16px;">Search</button>
+                </div>
             </form>
         </div>
     </div>

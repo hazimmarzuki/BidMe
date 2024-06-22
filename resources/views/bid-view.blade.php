@@ -38,6 +38,10 @@
             </div>
 
             <div class="mb-3">
+                <label for="category" class="form-label"><h4><strong>Category:</strong></h4><h5>{{ $item->category }}</h5></label>
+            </div>
+
+            <div class="mb-3">
                 <label for="price" class="form-label"><h4><strong>Current Price:</strong></h4> <h5>RM{{ $item->price }}</h5></label>
             </div>
 

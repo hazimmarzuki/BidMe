@@ -51,10 +51,25 @@
                 <div class="w-100">
                     <form class="d-flex" action="{{ route('search-item') }}" method="get" style="margin: 20px 20px 20px 0; padding: 0;">
                         @csrf
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search" style="height: 38px; font-size: 16px; width: 100%;"><!-- Adjust the width here -->
-                        <button class="btn btn-primary" type="submit" style="height: 38px; font-size: 16px;">Search</button>
+                        <div class="input-group" style="width: 100%;">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search" value="{{ old('search', request('search')) }}" style="height: 38px; font-size: 16px; width: 70%;">
+                            <select class="form-select" aria-label="category" name="category" style="width: 5%; margin-right: 5px;">
+                                <option value="All Items" {{ old('category', $category) == 'All Items' ? 'selected' : '' }}>All Items</option>
+                                <option value="Home & Living" {{ old('category', $category) == 'Home & Living' ? 'selected' : '' }}>Home & Living</option>
+                                <option value="Fashion" {{ old('category', $category) == 'Fashion' ? 'selected' : '' }}>Fashion</option>
+                                <option value="Lifestyle" {{ old('category', $category) == 'Lifestyle' ? 'selected' : '' }}>Lifestyle</option>
+                                <option value="Electronics" {{ old('category', $category) == 'Electronics' ? 'selected' : '' }}>Electronics</option>
+                                <option value="Health & Beauty" {{ old('category', $category) == 'Health & Beauty' ? 'selected' : '' }}>Health & Beauty</option>
+                                <option value="Baby & Toys" {{ old('category', $category) == 'Baby & Toys' ? 'selected' : '' }}>Baby & Toys</option>
+                            </select>
+                            <button class="btn btn-primary" type="submit" style="height: 38px; font-size: 16px;">Search</button>
+                        </div>
                     </form>
+
+
+
                 </div>
+
             </div>
                 {{ $items->links()}}
 

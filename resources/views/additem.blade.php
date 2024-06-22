@@ -46,6 +46,18 @@
                     <input type="text" id="title" name="title" value="{{ old('title') }}"required class="form-control">
                 </div>
                 <div class="mb-3">
+                    <label for="category" class="form-label">Item's category:</label>
+                    <select class="form-select" aria-label="category" name="category" >
+                        <option selected >Select the item's category</option>
+                        <option value="Home & Living">Home & Living</option>
+                        <option value="Fashion">Fashion</option>
+                        <option value="Lifestyle">Lifestyle</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Health & Beauty">Health & Beauty</option>
+                        <option value="Baby & Toys">Baby & Toys</option>
+                    </select>
+                </div>
+                <div class="mb-3">
                     <label for="description" class="form-label">Description:</label>
                     <textarea id="description" name="description" required class="form-control">{{ old('description') ?? '' }}</textarea>
                 </div>

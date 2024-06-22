@@ -76,9 +76,7 @@
                <div class="col-sm-10">
 
                 <textarea id="address" name="address" required
-                    class="form-control">
-                    {{ old('address') ?? '' }}
-                </textarea>
+                    class="form-control">{{ old('address') ?? '' }} </textarea>
 
                </div>
             </div>
