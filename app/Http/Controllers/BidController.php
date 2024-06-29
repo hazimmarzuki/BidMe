@@ -8,6 +8,8 @@ use App\Models\Item;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
 
 class BidController extends Controller
 {
@@ -99,5 +101,24 @@ public function showbids()
 
 }
 
+    public function sendEmail()
+    {
+        $details = [
+            'h' => 'Mail from Hazime',
+            'body' => 'This is a test email sent using Gmail SMTP.'
+        ];
+
+        try {
+            Mail::to('2021898792@student.uitm.edu.my')->send(new SendEmail($details));
+            return response()->json(['message' => 'Email sent successfully'], 200);
+        } catch (\Exception $e) {
+            // Log the error message for debugging purposes
+            \Log::error('Email send failed: ' . $e->getMessage());
+            return response()->json(['message' => 'Failed to send email', 'error' => $e->getMessage()], 500);
+        }
+        // Mail::to('2021898792@student.uitm.edu.my')->send(new sendEmail($details));
+
+        // return 'Email sent successfully';
+    }
 
 }

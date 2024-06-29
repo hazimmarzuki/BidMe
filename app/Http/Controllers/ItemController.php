@@ -58,6 +58,7 @@ class ItemController extends Controller
     ->paginate(6);
 
     $category = session()->get('category', 'All Items'); // retrieve the selected category from session
+    session()->put('previousUrl', 'square');
 
     return view('showitemssquare', compact('items', 'category'));
 }
@@ -72,7 +73,11 @@ public function indexList() //show all items
     ->withCount('bids')
     ->orderBy('countdown_date', 'asc')
     ->get();
-    return view('showitemslist', compact('items'));
+
+    $category = session()->get('category', 'All Items'); // retrieve the selected category from session
+    session()->put('previousUrl', 'list');
+
+    return view('showitemslist', compact('items', 'category'));
 }
 
 
@@ -84,6 +89,8 @@ public function search(Request $request)
         'search' => 'nullable|string',
         'category' => 'required|string',
     ]);
+
+    $previousUrl = session()->get('previousUrl');
 
     $search = $request->input('search');
     $category = $request->input('category');
@@ -110,11 +117,16 @@ public function search(Request $request)
         ->orderBy('countdown_date', 'asc')
         ->paginate(6);
 
-    if ($items->count() == 0) {
-        return redirect()->back()->withInput()->with('error', 'There are no results for your search.');
-    } else {
-        return view('showitemssquare', compact('items', 'category'))->with('success', 'Here are the results for your search.');    }
-}
+        if ($items->count() == 0) {
+            // Pass the category back with the error message
+            return redirect()->back()->withInput()->with('error', 'There are no results for your search.');
+        } else {
+            // Determine which view to return based on the previous URL
+            $previousUrl = session()->get('previousUrl', 'square'); // default to 'square' if not set
+            $view = ($previousUrl === 'list') ? 'showitemslist' : 'showitemssquare';
+            return view($view, compact('items', 'category'))->with('success', 'Here are the results for your search.');
+        }
+    }
 
 public function edit($id) //go to edit item form
 {

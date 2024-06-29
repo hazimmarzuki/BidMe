@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->decimal('amount',10,2);
             $table->foreignId('bid_id');
+            $table->string('status');
             $table->timestamps();
         });
     }

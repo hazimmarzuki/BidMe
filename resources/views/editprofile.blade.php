@@ -84,7 +84,7 @@
             <div class="col-sm-10">
               <input type="number" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
               class="form-control @error('phone') is-invalid @enderror"
-              name="phone"  value="{{Auth::user()->phone }}" />
+              name="phone"  value="0{{Auth::user()->phone }}" />
 
 
               @error('phone')

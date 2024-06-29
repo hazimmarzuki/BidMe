@@ -60,12 +60,19 @@
                         <td>{{ $bid->bid_time }}</td>
                         <td>
                             @if ($bid->item && $bid->item->countdown_date < now())
-                                @if ($bid->bid_amount == $bid->item->price && $bid->payment && $bid->payment->bid_id)
+                                @if ($bid->bid_amount == $bid->item->price && $bid->payment && $bid->payment->status == 'success')
                                     <span style="background-color: rgb(2, 202, 2);">Won</span>
                                     <span style="background-color: yellow; float: right;">PAID</span>
                                 @elseif ($bid->bid_amount == $bid->item->price && !$bid->payment)
                                     <span style="background-color: rgb(2, 202, 2);">Won</span>
-                                    <button style="background-color: yellow; float: right;"><a href="{{ route('payment', $bid->id) }}" class="text-decoration-none">PAY</a></button>
+                                    <button style="background-color: yellow; float: right;">
+                                        <a href="{{ route('payment', $bid->id) }}" class="text-decoration-none">PAY</a>
+                                    </button>
+                                @elseif ($bid->bid_amount == $bid->item->price && $bid->payment->status == 'fail')
+                                    <span style="background-color: red; float: right;">PAYMENT FAILED</span>
+                                    <button style="background-color: yellow; float: right; margin-left: 10px;">
+                                        <a href="{{ route('payment', $bid->id) }}" class="text-decoration-none">RETRY PAYMENT</a>
+                                    </button>
                                 @else
                                     <span style="background-color: rgb(216, 2, 2);">Lost</span>
                                 @endif

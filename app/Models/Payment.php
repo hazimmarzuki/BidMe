@@ -12,7 +12,8 @@ class Payment extends Model
 
     protected $fillable = [
         'amount',
-        'bid_id'
+        'bid_id',
+        'status'
     ];
 
     public function bid() {

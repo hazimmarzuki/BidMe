@@ -6,6 +6,8 @@ use App\Models\Bid;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\SendEmail;
 
 
 class PaymentController extends Controller
@@ -65,20 +67,29 @@ class PaymentController extends Controller
     }
 
     public function paymentStatus()
-
     {
         $request = request(); // get the current request instance
         $amount = session('amount');
+
+        // Determine the payment status
+        $status = $request->input('status_id') == 1 ? 'success' : ($request->input('status_id') == 3 ? 'fail' : 'unknown');
+
+        // Validate the request data
         $validatedData = [
             'amount' => $amount,
             'bid_id' => $request->input('order_id'),
+            'status' => $status,
         ];
 
-        Payment::create($validatedData);
+        // Update the existing record or create a new one
+        Payment::updateOrCreate(
+            ['bid_id' => $request->input('order_id')], // Criteria to find the existing record
+            $validatedData // Data to update or create
+        );
 
-        return redirect()->route('show-bids')->with('success', 'item has been paid!');
-
+        return redirect()->route('show-bids')->with('success', 'Item has been paid!');
     }
+
 
     public function callback()
     {
@@ -94,4 +105,6 @@ class PaymentController extends Controller
         return redirect()->route('show-bids')->with('success', 'item has been paid!');
 
     }
+
+
 }

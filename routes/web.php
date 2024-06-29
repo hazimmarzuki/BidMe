@@ -123,3 +123,4 @@ Route::get ('/purchase-history', [HistoryController::class, 'purchasehistory'])
 Route::get ('/sales-history', [HistoryController::class, 'saleshistory'])
 ->name ('sales-history')->middleware('auth');
 
+Route::get('/send-email', [BidController::class, 'sendEmail']);
