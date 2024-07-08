@@ -69,7 +69,7 @@
                                         <a href="{{ route('payment', $bid->id) }}" class="text-decoration-none">PAY</a>
                                     </button>
                                 @elseif ($bid->bid_amount == $bid->item->price && $bid->payment->status == 'fail')
-                                    <span style="background-color: red; float: right;">PAYMENT FAILED</span>
+                                    <span style="background-color: red; ">PAYMENT FAILED</span>
                                     <button style="background-color: yellow; float: right; margin-left: 10px;">
                                         <a href="{{ route('payment', $bid->id) }}" class="text-decoration-none">RETRY PAYMENT</a>
                                     </button>
