@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Email from Laravel</title>
+    <title>BidMe</title>
 </head>
 <body>
-    <h1>{{ $details['h'] }}</h1>
+    <h1>{{ $details['title'] }}</h1>
     <p>{{ $details['body'] }}</p>
 </body>
 </html>

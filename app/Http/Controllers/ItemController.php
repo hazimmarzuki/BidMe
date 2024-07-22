@@ -81,53 +81,6 @@ public function indexList() //show all items
 }
 
 
-
-
-public function search(Request $request)
-{
-    $request->validate([
-        'search' => 'nullable|string',
-        'category' => 'required|string',
-    ]);
-
-    $previousUrl = session()->get('previousUrl');
-
-    $search = $request->input('search');
-    $category = $request->input('category');
-    session()->put('category', $category); // store the selected category in session
-
-    $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
-    $buyer_id = Auth::id();
-
-    $items = Item::where('countdown_date', '>', $currentDateTime)
-        ->where('seller_id', '!=', $buyer_id);
-
-    if ($search) {
-        $items->where(function ($query) use ($search) {
-            $query->where('title', 'like', "%$search%")
-                ->orWhere('description', 'like', "%$search%");
-        });
-    }
-
-    $items->when($category != 'All Items', function ($query) use ($category) {
-        $query->where('category', $category);
-    });
-
-    $items = $items->withCount('bids')
-        ->orderBy('countdown_date', 'asc')
-        ->paginate(6);
-
-        if ($items->count() == 0) {
-            // Pass the category back with the error message
-            return redirect()->back()->withInput()->with('error', 'There are no results for your search.');
-        } else {
-            // Determine which view to return based on the previous URL
-            $previousUrl = session()->get('previousUrl', 'square'); // default to 'square' if not set
-            $view = ($previousUrl === 'list') ? 'showitemslist' : 'showitemssquare';
-            return view($view, compact('items', 'category'))->with('success', 'Here are the results for your search.');
-        }
-    }
-
 public function edit($id) //go to edit item form
 {
     $item = Item::findOrFail($id);
@@ -175,4 +128,77 @@ public function itemview($id)
         ->findOrFail($id);
         return view('item-view', compact('item'));
     }
+
+
+    public function searchAjax(Request $request)
+    {
+        $request->validate([
+            'search' => 'nullable|string',
+            'category' => 'required|string',
+        ]);
+
+        $search = $request->input('search');
+        $category = $request->input('category');
+
+        $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
+        $buyer_id = Auth::id();
+
+        $items = Item::where('countdown_date', '>', $currentDateTime)
+            ->where('seller_id', '!=', $buyer_id);
+
+        if ($search) {
+            $items->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%$search%")
+                    ->orWhere('description', 'like', "%$search%");
+            });
+        }
+
+        $items->when($category != 'All Items', function ($query) use ($category) {
+            $query->where('category', $category);
+        });
+
+        $items = $items->withCount('bids')
+            ->orderBy('countdown_date', 'asc')
+            ->paginate(6);
+
+            return view('partials.items-square', compact('items'));
+    }
+
+
+    public function searchAjax2(Request $request)
+    {
+        $request->validate([
+            'search' => 'nullable|string',
+            'category' => 'required|string',
+        ]);
+
+        $search = $request->input('search');
+        $category = $request->input('category');
+
+        $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
+        $buyer_id = Auth::id();
+
+        $items = Item::where('countdown_date', '>', $currentDateTime)
+            ->where('seller_id', '!=', $buyer_id);
+
+        if ($search) {
+            $items->where(function ($query) use ($search) {
+                $query->where('title', 'like', "%$search%")
+                    ->orWhere('description', 'like', "%$search%");
+            });
+        }
+
+        $items->when($category != 'All Items', function ($query) use ($category) {
+            $query->where('category', $category);
+        });
+
+        $items = $items->withCount('bids')
+            ->orderBy('countdown_date', 'asc')
+            ->get();
+
+        return view('partials.items', compact('items'));
+    }
+
 }
+
+

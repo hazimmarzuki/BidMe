@@ -6,7 +6,6 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -43,8 +42,7 @@ Route::post('/login', [LoginController::class, 'store' ]) -> name ('login-store'
 Route::post('/logout', [LogoutController::class, 'logout' ]) -> name ('logout');
 
 
-Route::get('/dashboard', [DashboardController::class, 'index' ])
--> name ('dashboard')->middleware ('auth');
+
 
 //profile
 Route::get('/profile-square', [ProfileController::class, 'indexSquare' ]) // show all items of the user
@@ -84,8 +82,11 @@ Route::delete ('/item/{id}', [ItemController::class, 'destroy'])
 Route::get ('/item/{id}/view', [ItemController::class, 'itemview'])
 -> name ('item-view') ->middleware ('auth');
 
-Route::get('/search-item', [ItemController::class, 'search'])
-->name('search-item') ->middleware('auth');
+Route::get('/search-item-ajax', [ItemController::class, 'searchAjax'])
+->name('search-item-ajax');
+
+Route::get('/search-item-ajax2', [ItemController::class, 'searchAjax2'])
+->name('search-item-ajax2');
 
 //bid
 
@@ -124,3 +125,4 @@ Route::get ('/sales-history', [HistoryController::class, 'saleshistory'])
 ->name ('sales-history')->middleware('auth');
 
 Route::get('/send-email', [BidController::class, 'sendEmail']);
+
