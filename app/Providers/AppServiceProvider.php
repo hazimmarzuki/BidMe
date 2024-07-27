@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\URL;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\ServiceProvider;
-use Nyholm\Psr7\Factory\Psr17Factory;
-use Psr\Http\Message\RequestFactoryInterface;
-use Psr\Http\Message\StreamFactoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +13,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
+        // You can register your application's service bindings here if needed.
     }
 
     /**
@@ -23,12 +21,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Use Bootstrap for pagination styling
         Paginator::useBootstrap();
+
+        // Force HTTPS scheme in production environment
         if(config('app.env') === 'production') {
             URL::forceScheme('https');
         }
     }
-
-
 }
