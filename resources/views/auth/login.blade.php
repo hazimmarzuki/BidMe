@@ -30,7 +30,7 @@
                 >
                 <div class="col-sm-10">
                   <input type="email" class="form-control "
-                  name="email"  value="" />
+                  name="email"  value="" required/>
 
                 </div>
               </div>
@@ -47,6 +47,7 @@
                   class="form-control "
                    name="password"
                   value=""
+                  required
                 />
 
               </div>

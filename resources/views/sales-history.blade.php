@@ -50,9 +50,10 @@
                 </tr>
             </thead>
             <tbody>
+                @php $no = 0; @endphp
                 @foreach ($filteredHistory as $index => $info)
                     <tr>
-                        <th scope="row">{{ $index + 1 }}</th>
+                        <th scope="row">{{ $no++}}</th>
                         <td>
                             <a href="{{ route('item-view', $info->item->id) }}" style="text-decoration: none; color: inherit;">
                                 {{ $info->item->title }}

@@ -48,7 +48,7 @@
                 <div class="mb-3">
                     <label for="category" class="form-label">Item's category:</label>
                     <select class="form-select" aria-label="category" name="category" >
-                        <option selected >Select the item's category</option>
+                        <option value="Others" >Select the item's category</option>
                         <option value="Home & Living">Home & Living</option>
                         <option value="Fashion">Fashion</option>
                         <option value="Lifestyle">Lifestyle</option>

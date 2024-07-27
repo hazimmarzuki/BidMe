@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+use App\Models\Bid;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 
 
 class ItemController extends Controller
@@ -87,38 +88,62 @@ public function edit($id) //go to edit item form
     return view('edit-item', compact('item'));
 }
 
-public function update(Request $request, $id) //update the edited item
+public function update(Request $request, $id) // update the edited item
 {
-
     $item = Item::findOrFail($id);
 
+    $validatedData = $request->validate([
+        'title' => 'required|string|max:255',
+        'category' => 'required',
+        'description' => 'required|string',
+        'price' => 'required|numeric|min:0',
+        'countdown_date' => 'required|date_format:Y-m-d\TH:i|after:now',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
     $item->title = $request->title;
     $item->category = $request->category;
     $item->description = $request->description;
     $item->price = $request->price;
     $item->countdown_date = $request->countdown_date;
+
     if ($request->hasFile('image')) {
+        // Delete the old image
+        if (file_exists(public_path($item->image))) {
+            unlink(public_path($item->image));
+        }
+
+        // Upload the new image
         $image = $request->file('image');
         $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images/' . 'items_image'), $imageName);
-        $item->image = 'images/' . 'items_image/'. $imageName;
+        $image->move(public_path('images/items_image'), $imageName);
+        $item->image = 'images/items_image/' . $imageName;
     }
 
-$item->save();
+    $item->save();
 
-return redirect()->route('profile-square')->with('success', 'Item updated successfully');
-
+    return redirect()->route('profile-square')->with('success', 'Item updated successfully');
 }
-public function destroy ($id) //delete an item
-{
 
+public function destroy($id) // delete an item
+{
     $item = Item::findOrFail($id);
-    unlink($item->image);
+
+    // Delete the image file
+    $imagePath = public_path($item->image);
+    if (file_exists($imagePath)) {
+        unlink($imagePath);
+    }
+
+    // Delete associated bids
+    Bid::where('item_id', $id)->delete();
+
+    // Delete the item
     $item->delete();
 
-    return redirect()->route('profile-square')->with('success', 'item deleted successfully!');
+    return redirect()->route('profile-square')->with('success', 'Item and associated bids deleted successfully!');
 }
+
 
 
 

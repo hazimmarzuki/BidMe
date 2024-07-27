@@ -9,6 +9,15 @@
             @if (session('success'))
             <p class="alert alert-success">{{session('success')}}</p>
             @endif
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
             <form method="POST" action="{{ route('update-item' , $item->id) }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">

@@ -38,7 +38,7 @@ class PaymentController extends Controller
             'billExternalReferenceNo' => $bid->id, //order-id
             'billTo'=>$bid->buyer->name,
             'billEmail'=>$bid->buyer->email,
-            'billPhone'=> '0126777439',
+            'billPhone' => '0' . $bid->buyer->phone,
             'billSplitPayment'=>0,
             'billSplitPaymentArgs'=>'',
             'billPaymentChannel'=>0,
