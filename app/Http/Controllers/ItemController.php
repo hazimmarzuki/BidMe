@@ -8,6 +8,7 @@ use App\Models\Item;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 
 class ItemController extends Controller
@@ -33,10 +34,13 @@ class ItemController extends Controller
 
         // Handle file upload
         if ($request->hasFile('image')) {
-            $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension();
-            $image->move(public_path('images/' . 'items_image'), $imageName);
-            $validatedData['image'] = 'images/' . 'items_image/'. $imageName;
+            $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+            $validatedData['image']= $uploadedFileUrl;
+
+            // $image = $request->file('image');
+            // $imageName = time() . '.' . $image->getClientOriginalExtension();
+            // $image->move(public_path('images/' . 'items_image'), $imageName);
+            // $validatedData['image'] = 'images/' . 'items_image/'. $imageName;
         }
 
         $validatedData['seller_id'] = Auth::id();
