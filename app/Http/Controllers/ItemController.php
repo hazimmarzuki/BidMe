@@ -111,17 +111,20 @@ public function update(Request $request, $id) // update the edited item
     $item->price = $request->price;
     $item->countdown_date = $request->countdown_date;
 
+
     if ($request->hasFile('image')) {
-        // Delete the old image
-        if (file_exists(public_path($item->image))) {
-            unlink(public_path($item->image));
+        // Delete the old image from Cloudinary if it exists
+        if ($item->image) {
+            // Extract the public ID from the image URL
+            $publicId = basename($item->image, '.' . pathinfo($item->image, PATHINFO_EXTENSION));
+
+            // Delete the old image
+            Cloudinary::destroy($publicId);
         }
 
-        // Upload the new image
-        $image = $request->file('image');
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->move(public_path('images/items_image'), $imageName);
-        $item->image = 'images/items_image/' . $imageName;
+        // Upload the new image to Cloudinary
+        $uploadedFileUrl = Cloudinary::upload($request->file('image')->getRealPath())->getSecurePath();
+        $item->image = $uploadedFileUrl;
     }
 
     $item->save();
@@ -129,14 +132,17 @@ public function update(Request $request, $id) // update the edited item
     return redirect()->route('profile-square')->with('success', 'Item updated successfully');
 }
 
-public function destroy($id) // delete an item
+public function destroy($id)
 {
     $item = Item::findOrFail($id);
 
-    // Delete the image file
-    $imagePath = public_path($item->image);
-    if (file_exists($imagePath)) {
-        unlink($imagePath);
+    // Delete the image from Cloudinary
+    if ($item->image) {
+        // Extract the public ID from the image URL
+        $publicId = basename($item->image, '.' . pathinfo($item->image, PATHINFO_EXTENSION));
+
+        // Delete the old image
+        Cloudinary::destroy($publicId);
     }
 
     // Delete associated bids
