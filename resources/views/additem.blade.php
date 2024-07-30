@@ -69,12 +69,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="countdown_date" class="form-label">Last time for bid:</label>
-                    <?php
-                    use Carbon\Carbon;
-
-                    $currentDateTime = Carbon::now()->format('Y-m-d\TH:i');
-                    ?>
-                    <input type="datetime-local" id="countdown_date" name="countdown_date" value="{{ old('countdown_date') }}" min="{{ $currentDateTime}}" required class="form-control">
+                    <input type="datetime-local" id="countdown_date" name="countdown_date" value="{{ old('countdown_date') }}" min="{{  \Carbon\Carbon::now()->addMinute()->format('Y-m-d\TH:i') }}" required class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image:</label>
