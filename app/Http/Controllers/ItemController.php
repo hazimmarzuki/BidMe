@@ -165,7 +165,7 @@ public function itemview($id)
     }
 
 
-    public function searchAjax(Request $request)
+public function searchAjax(Request $request)
     {
         $request->validate([
             'search' => 'nullable|string',
@@ -183,8 +183,8 @@ public function itemview($id)
 
         if ($search) {
             $items->where(function ($query) use ($search) {
-                $query->where('title', 'like', "%$search%")
-                    ->orWhere('description', 'like', "%$search%");
+                $query->whereRaw('LOWER(title) like ?', ["%".strtolower($search)."%"])
+                      ->orWhereRaw('LOWER(description) like ?', ["%".strtolower($search)."%"]);
             });
         }
 
@@ -196,43 +196,43 @@ public function itemview($id)
             ->orderBy('countdown_date', 'asc')
             ->paginate(6);
 
-            return view('partials.items-square', compact('items'));
-    }
+        return view('partials.items-square', compact('items'));
+}
 
 
-    public function searchAjax2(Request $request)
-    {
-        $request->validate([
-            'search' => 'nullable|string',
-            'category' => 'required|string',
-        ]);
+public function searchAjax2(Request $request)
+{
+    $request->validate([
+        'search' => 'nullable|string',
+        'category' => 'required|string',
+    ]);
 
-        $search = $request->input('search');
-        $category = $request->input('category');
+    $search = $request->input('search');
+    $category = $request->input('category');
 
-        $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
-        $buyer_id = Auth::id();
+    $currentDateTime = Carbon::now('Asia/Kuala_Lumpur')->format('Y-m-d H:i:s');
+    $buyer_id = Auth::id();
 
-        $items = Item::where('countdown_date', '>', $currentDateTime)
-            ->where('seller_id', '!=', $buyer_id);
+    $items = Item::where('countdown_date', '>', $currentDateTime)
+        ->where('seller_id', '!=', $buyer_id);
 
-        if ($search) {
-            $items->where(function ($query) use ($search) {
-                $query->where('title', 'like', "%$search%")
-                    ->orWhere('description', 'like', "%$search%");
-            });
-        }
-
-        $items->when($category != 'All Items', function ($query) use ($category) {
-            $query->where('category', $category);
+    if ($search) {
+        $items->where(function ($query) use ($search) {
+            $query->whereRaw('LOWER(title) like ?', ["%".strtolower($search)."%"])
+                  ->orWhereRaw('LOWER(description) like ?', ["%".strtolower($search)."%"]);
         });
-
-        $items = $items->withCount('bids')
-            ->orderBy('countdown_date', 'asc')
-            ->get();
-
-        return view('partials.items', compact('items'));
     }
+
+    $items->when($category != 'All Items', function ($query) use ($category) {
+        $query->where('category', $category);
+    });
+
+    $items = $items->withCount('bids')
+        ->orderBy('countdown_date', 'asc')
+        ->get();
+
+    return view('partials.items', compact('items'));
+}
 
 }
 
