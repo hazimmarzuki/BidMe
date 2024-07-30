@@ -39,6 +39,10 @@
                     </ul>
                 </div>
             @endif
+            @php
+            $currentDateTime = date('Y-m-d\TH:i');
+            @endphp
+
             <form method="POST" action="{{ route('store-item') }}" enctype="multipart/form-data">
                 @csrf
                 <div class="mb-3">
@@ -67,7 +71,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="countdown_date" class="form-label">Last time for bid:</label>
-                    <input type="datetime-local" id="countdown_date" name="countdown_date" value="{{ old('countdown_date') }}" required class="form-control">
+                    <input type="datetime-local" id="countdown_date" name="countdown_date" value="{{ old('countdown_date') }}" min="{{ $currentDateTime }}" required class="form-control">
                 </div>
                 <div class="mb-3">
                     <label for="image" class="form-label">Upload Image:</label>
