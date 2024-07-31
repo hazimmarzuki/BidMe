@@ -81,9 +81,15 @@
                                     $highestBid = $bid->where('item_id', $bid->item_id)->max('bid_amount');
                                 @endphp
                                 @if ($bid->bid_amount == $highestBid)
-                                    <span style="background-color: rgb(141, 170, 250);">On going (Currently win)</span>
+                                    <span style="background-color: rgb(141, 170, 250);">On going (Currently win)
+                                        Time remaining:
+                                        <span id="countdown-{{ $item->id }}"></span>
+                                    </span>
                                 @else
-                                    <span style="background-color: rgb(141, 170, 250);">On going (Currently lost)</span>
+                                    <span style="background-color: rgb(141, 170, 250);">On going (Currently lost)
+                                        Time remaining:
+                                        <span id="countdown-{{ $item->id }}"></span>
+                                    </span>
                                     <button style="float: right;"><a style="text-decoration: none" href="{{ route('bid-view', $bid->item_id) }}">Go bid</a></button>
                                 @endif
                             @endif
