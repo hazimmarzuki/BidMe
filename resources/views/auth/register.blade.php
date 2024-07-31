@@ -30,7 +30,7 @@
                 <div class="col-sm-10">
                     <input type="text" class="form-control @error('name') is-invalid @enderror"
                     name="name" value="{{ old('name') }}"
-                    pattern="[A-Za-z]+" title="Only alphabetic characters are allowed" required>
+                    pattern="[A-Za-z\s]+" title="Only alphabetic characters are allowed" required>
 
 
                   @error('name')
