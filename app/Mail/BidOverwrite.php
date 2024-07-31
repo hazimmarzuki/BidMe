@@ -18,10 +18,10 @@ class BidOverwrite extends Mailable
     /**
      * Create a new message instance.
      */
-    public function __construct($details)
+    public function __construct($item)
     {
         //
-        $this->details = $details;
+        $this->item = $item;
     }
 
     /**
@@ -49,7 +49,7 @@ class BidOverwrite extends Mailable
     {
         return $this->subject('Bid Overwrite')
                     ->view('sendemail')
-                    ->with('details', $this->details);
+                    ->with('item', $this->item);
     }
 }
 
