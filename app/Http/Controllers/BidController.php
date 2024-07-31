@@ -61,7 +61,7 @@ public function bid(Request $request, $id) // update item price and create/ovewr
 
             $details = [
                 'title' => 'Your Bid Was Outbid',
-                'body' => 'Hi there! Just letting you know that someone has outbid your offer for ' . $itemName . '. Keep an eye on the bidding if you want to place another bid!'
+                'body' => 'Hi there! Just letting you know that someone has outbid your offer for **' . $itemName . '**. Keep an eye on the bidding if you want to place another bid! [Go to bid](https://bid-me-29d8b321db8e.herokuapp.com/)'
             ];
                 Mail::to($highestBidUserEmail)->send(new BidOverwrite($details));
 

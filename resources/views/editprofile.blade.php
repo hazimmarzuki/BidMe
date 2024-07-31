@@ -51,7 +51,7 @@
             >
             <div class="col-sm-10">
               <input type="text" class="form-control @error('name') is-invalid @enderror"
-              name="name"  value="{{ Auth::user()->name }}" />
+              name="name"  pattern="[A-Za-z]+" value="{{ Auth::user()->name }}" />
 
 
               @error('name')
