@@ -10,21 +10,20 @@ class HistoryController extends Controller
 {
     //
 
-    public function purchasehistory () {
+    public function purchasehistory()
+    {
+        $history = Bid::where('buyer_id', Auth::id())
+            ->with(['item', 'seller', 'payment'])
+            ->orderBy('bid_time', 'desc')
+            ->get();
 
-        $history =  Bid::where('buyer_id', Auth::id())
-        ->with('item')
-        ->with('seller')
-        ->with('payment')
-        ->orderBy('bid_time', 'desc')
-        ->get();
+        $filteredHistory = $history->filter(function ($bid) {
+            return $bid->payment && $bid->payment->bid_id == $bid->id && $bid->payment->status == 'success';
+        });
 
-    $filteredHistory = collect($history)->filter(function ($bid) {
-        return $bid->payment && $bid->payment->bid_id == $bid->id;
-    });
-
-    return view('purchase-history', compact('filteredHistory'));
+        return view('purchase-history', ['history' => $filteredHistory]);
     }
+
 
     public function saleshistory () {
         $history =  Bid::where('seller_id', Auth::id())
