@@ -82,6 +82,7 @@ class PaymentController extends Controller
         ];
 
         // Update the existing record or create a new one
+        if($status == 'success')
         Payment::updateOrCreate(
             ['bid_id' => $request->input('order_id')], // Criteria to find the existing record
             $validatedData // Data to update or create
